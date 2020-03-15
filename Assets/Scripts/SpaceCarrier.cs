@@ -2,15 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-// **********************
-// TODO refatorar criando uma classe apenas para o pathLine!!!!!!!!!!!!
 public class SpaceCarrier : MonoBehaviour
 {
 
     private PathLine pathLine;
     Rigidbody2D rigidBody;
 
-    public float carrierVelocity = 1.5f;
+    public float carrierVelocity = 0.5f;
     void Start()
     {
         pathLine = GetComponent<PathLine>();

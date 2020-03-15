@@ -19,6 +19,14 @@ public class PathLine : MonoBehaviour
         spaceCarrier = GetComponent<SpaceCarrier>();
     }
 
+    private void Update()
+    {
+        if (Input.GetMouseButtonUp(0))
+        {
+            isCreatingPath = false;
+        }
+    }
+
     private void OnMouseDown()
     {
         isCreatingPath = true;
@@ -41,6 +49,7 @@ public class PathLine : MonoBehaviour
         Vector3 lastLinePoint = pathLine.GetPosition(pathLine.positionCount - 1);
         Vector3 direction = getMousePosition() - lastLinePoint;
         float angleBetweenRad = Mathf.Atan2(direction.y, direction.x);
+        // COLOCAR ESSA lÒGICA GENERICA E VER SE ARRUMA O BUG
         for (int i = 0; i < amountChuncksToAdd; i++)
         {
             float scalarSize = (i + 1) * minimalLineChunck;
@@ -71,14 +80,20 @@ public class PathLine : MonoBehaviour
 
     public void updateLine()
     {
+        Debug.Log(pathLine.positionCount);
         if (pathLine.positionCount == 0) return;
         float distance = Vector3.Distance(spaceCarrier.currentPosition, pathLine.GetPosition(0));
+        Debug.Log("distance");
+        Debug.Log(distance);
         if (distance > distanceToRemoveChunck) return;
+        Debug.Log("TROEEE");
         Vector3[] positions = new Vector3[pathLine.positionCount];
         pathLine.GetPositions(positions);
         List<Vector3> positionsList = new List<Vector3>(positions);
         positionsList.RemoveAt(0);
-        pathLine.SetPositions(positionsList.ToArray());
+        Vector3[] positionsArray = positionsList.ToArray();
+        pathLine.positionCount = positionsArray.Length;
+        pathLine.SetPositions(positionsArray);
     }
 
     public Vector3 getPosition(int position)

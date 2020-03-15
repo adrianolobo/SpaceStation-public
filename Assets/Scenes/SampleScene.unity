@@ -220,6 +220,7 @@ GameObject:
   - component: {fileID: 715588389}
   - component: {fileID: 715588391}
   - component: {fileID: 715588392}
+  - component: {fileID: 715588393}
   m_Layer: 0
   m_Name: space_carrier 1
   m_TagString: Untagged
@@ -330,8 +331,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1240904ec2a8efc438d803fa881a5af3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  minimalLineChunck: 0.15
-  distanceToRemoveChunck: 0.08
   carrierVelocity: 1.5
 --- !u!120 &715588391
 LineRenderer:
@@ -452,3 +451,17 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &715588393
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 715588386}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 06534b11fe0957549b3c5ac76bb34f3c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  minimalLineChunck: 0.15
+  distanceToRemoveChunck: 0.08
