@@ -80,13 +80,9 @@ public class PathLine : MonoBehaviour
 
     public void updateLine()
     {
-        Debug.Log(pathLine.positionCount);
         if (pathLine.positionCount == 0) return;
         float distance = Vector3.Distance(spaceCarrier.currentPosition, pathLine.GetPosition(0));
-        Debug.Log("distance");
-        Debug.Log(distance);
         if (distance > distanceToRemoveChunck) return;
-        Debug.Log("TROEEE");
         Vector3[] positions = new Vector3[pathLine.positionCount];
         pathLine.GetPositions(positions);
         List<Vector3> positionsList = new List<Vector3>(positions);
