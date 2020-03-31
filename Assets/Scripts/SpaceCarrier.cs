@@ -8,7 +8,7 @@ public class SpaceCarrier : MonoBehaviour
     private PathLine pathLine;
     Rigidbody2D rigidBody;
 
-    private float carrierVelocity = 20f;
+    private float carrierVelocity = 40f;
     void Start()
     {
         pathLine = GetComponent<PathLine>();
@@ -16,7 +16,6 @@ public class SpaceCarrier : MonoBehaviour
         rigidBody.velocity = new Vector2(0, 0);
     }
 
-    // Update is called once per frame
     void Update()
     {
         pathLine.drawLine();

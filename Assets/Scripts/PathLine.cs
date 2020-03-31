@@ -9,11 +9,13 @@ public class PathLine : MonoBehaviour
     private SpaceCarrier spaceCarrier;
 
     bool isCreatingPath = false;
+    Vector3 lastMousePosition;
 
     public float minimalLineChunck = 0.15f;
     public float distanceToRemoveChunck = 0.08f;
     void Start()
     {
+        lastMousePosition = getMousePosition();
         pathLine = GetComponent<LineRenderer>();
         pathLine.positionCount = 0;
         spaceCarrier = GetComponent<SpaceCarrier>();
@@ -24,6 +26,7 @@ public class PathLine : MonoBehaviour
         if (Input.GetMouseButtonUp(0))
         {
             isCreatingPath = false;
+            return;
         }
     }
 
@@ -34,22 +37,23 @@ public class PathLine : MonoBehaviour
         pathLine.SetPosition(0, getMousePosition());
     }
 
+    private bool hasMouseMoved()
+    {
+        if (getMousePosition() == lastMousePosition) return false;
+        lastMousePosition = getMousePosition();
+        return true;
+    }
+
     public void drawLine()
     {
         if (!isCreatingPath) return;
+        if (!hasMouseMoved()) return;
         float distanceToMouse = calculateDistanceToMouse();
         if (distanceToMouse < minimalLineChunck) return;
-        if (pathLine.positionCount == 0)
-        {
-            pathLine.positionCount = 1;
-            pathLine.SetPosition(0, getMousePosition());
-            return;
-        }
         int amountChuncksToAdd = Mathf.FloorToInt(distanceToMouse / minimalLineChunck);
-        Vector3 lastLinePoint = pathLine.GetPosition(pathLine.positionCount - 1);
+        Vector3 lastLinePoint = getMouseOrCarrierPosition();
         Vector3 direction = getMousePosition() - lastLinePoint;
         float angleBetweenRad = Mathf.Atan2(direction.y, direction.x);
-        // COLOCAR ESSA lÒGICA GENERICA E VER SE ARRUMA O BUG
         for (int i = 0; i < amountChuncksToAdd; i++)
         {
             float scalarSize = (i + 1) * minimalLineChunck;
@@ -62,10 +66,18 @@ public class PathLine : MonoBehaviour
         }
     }
 
+    private Vector3 getMouseOrCarrierPosition()
+    {
+        if (pathLine.positionCount > 0)
+        {
+            return pathLine.GetPosition(pathLine.positionCount - 1);
+        }
+        return spaceCarrier.currentPosition;
+    }
+
     float calculateDistanceToMouse()
     {
-        if (pathLine.positionCount < 1) return 0;
-        Vector3 lastPosition = pathLine.GetPosition(pathLine.positionCount - 1);
+        Vector3 lastPosition = getMouseOrCarrierPosition();
         Vector3 mousePosition = getMousePosition();
         return Vector3.Distance(lastPosition, mousePosition);
     }
