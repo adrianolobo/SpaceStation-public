@@ -6,7 +6,6 @@ public class StationLanding : MonoBehaviour
 {
     public void landCarrier(SpaceCarrier carrier, Vector3 landingCorrectionPosition)
     {
-
         carrier.land(landingCorrectionPosition, transform.position);
     }
 }

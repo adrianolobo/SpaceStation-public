@@ -8,7 +8,7 @@ public class SpaceCarrier : MonoBehaviour
     private PathLine pathLine;
     Rigidbody2D rigidBody;
 
-    private float carrierVelocity = 40f;
+    private float carrierVelocity = 0.5f;
     void Start()
     {
         pathLine = GetComponent<PathLine>();
@@ -37,8 +37,8 @@ public class SpaceCarrier : MonoBehaviour
         Vector2 direction = pathLine.getPosition(0) - currentPosition;
         float angleBetweenRad = Mathf.Atan2(direction.y, direction.x);
         rigidBody.velocity = new Vector2(
-            Mathf.Cos(angleBetweenRad) * (carrierVelocity * Time.deltaTime),
-            Mathf.Sin(angleBetweenRad) * (carrierVelocity * Time.deltaTime)
+            Mathf.Cos(angleBetweenRad) * (carrierVelocity),
+            Mathf.Sin(angleBetweenRad) * (carrierVelocity)
         );
     }
 
@@ -53,6 +53,7 @@ public class SpaceCarrier : MonoBehaviour
 
     public void land(Vector3 landCorrectionPosition, Vector3 targetPosition)
     {
+        gameObject.layer = LayerMask.NameToLayer("SpaceCarrierLanding");
         pathLine.createLandingLine(landCorrectionPosition, targetPosition);
     }
 }
