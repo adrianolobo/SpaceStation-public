@@ -50,9 +50,15 @@ public class PathLine : MonoBehaviour
         if (!hasMouseMoved()) return;
         float distanceToMouse = calculateDistanceToMouse();
         if (distanceToMouse < minimalLineChunck) return;
-        int amountChuncksToAdd = Mathf.FloorToInt(distanceToMouse / minimalLineChunck);
+        createLineChunks(getMousePosition());
+    }
+
+    private void createLineChunks(Vector3 targetPosition)
+    {
         Vector3 lastLinePoint = getMouseOrCarrierPosition();
-        Vector3 direction = getMousePosition() - lastLinePoint;
+        float distanceToTarget = Vector3.Distance(lastLinePoint, targetPosition);
+        int amountChuncksToAdd = Mathf.FloorToInt(distanceToTarget / minimalLineChunck);
+        Vector3 direction = targetPosition - lastLinePoint;
         float angleBetweenRad = Mathf.Atan2(direction.y, direction.x);
         for (int i = 0; i < amountChuncksToAdd; i++)
         {
@@ -60,10 +66,16 @@ public class PathLine : MonoBehaviour
             float pointX = lastLinePoint.x + (Mathf.Cos(angleBetweenRad) * scalarSize);
             float pointY = lastLinePoint.y + (Mathf.Sin(angleBetweenRad) * scalarSize);
             Vector3 newPoint = new Vector3(pointX, pointY, 0);
-            int newIndex = pathLine.positionCount;
-            pathLine.positionCount++;
-            pathLine.SetPosition(newIndex, newPoint);
+            addPathPoint(newPoint);
         }
+        addPathPoint(targetPosition);
+    }
+
+    private void addPathPoint(Vector3 newPoint)
+    {
+        int newIndex = pathLine.positionCount;
+        pathLine.positionCount++;
+        pathLine.SetPosition(newIndex, newPoint);
     }
 
     private Vector3 getMouseOrCarrierPosition()
@@ -115,5 +127,12 @@ public class PathLine : MonoBehaviour
         {
             return pathLine.positionCount;
         }
+    }
+
+    public void createLandingLine(Vector3 landCorrectionPosition, Vector3 position)
+    {
+        pathLine.positionCount = 0;
+        createLineChunks(landCorrectionPosition);
+        createLineChunks(position);
     }
 }

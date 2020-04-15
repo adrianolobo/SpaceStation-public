@@ -50,4 +50,9 @@ public class SpaceCarrier : MonoBehaviour
             return position;
         }
     }
+
+    public void land(Vector3 landCorrectionPosition, Vector3 targetPosition)
+    {
+        pathLine.createLandingLine(landCorrectionPosition, targetPosition);
+    }
 }

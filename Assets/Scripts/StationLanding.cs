@@ -4,8 +4,9 @@ using UnityEngine;
 
 public class StationLanding : MonoBehaviour
 {
-    public void LandCarrier(SpaceCarrier carrier)
+    public void landCarrier(SpaceCarrier carrier, Vector3 landingCorrectionPosition)
     {
-        
+
+        carrier.land(landingCorrectionPosition, transform.position);
     }
 }

@@ -12,8 +12,10 @@ public class LandingTrigger : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Debug.Log("YAYYYYY");
-        Debug.Log(collision.gameObject);
+        if (collision.gameObject.name != "SpaceCarrier") return;
+        SpaceCarrier spaceCarrier = collision.gameObject.GetComponent<SpaceCarrier>();
+        Vector3 landingCorrectionPosition = transform.position;
+        stationLanding.landCarrier(spaceCarrier, landingCorrectionPosition);
     }
 
     // Update is called once per frame
