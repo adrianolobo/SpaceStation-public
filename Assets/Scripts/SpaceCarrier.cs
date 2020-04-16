@@ -7,10 +7,17 @@ public class SpaceCarrier : MonoBehaviour
 
     private PathLine pathLine;
     Rigidbody2D rigidBody;
+    private StationLanding stationLanding;
 
-    private float carrierVelocity = 0.5f;
+    private float initialCarrierVelocity = 0.5f;
+    private float carrierVelocity;
+    private bool isLanded = false;
+
+    private string landingLayer = "SpaceCarrierLanding";
+    private string deliveredLayer = "SpaceCarrierDelivered";
     void Start()
     {
+        carrierVelocity = initialCarrierVelocity;
         pathLine = GetComponent<PathLine>();
         rigidBody = GetComponent<Rigidbody2D>();
         rigidBody.velocity = new Vector2(0, 0);
@@ -33,13 +40,21 @@ public class SpaceCarrier : MonoBehaviour
     }
     void move()
     {
-        if (pathLine.positionCount < 1) return;
-        Vector2 direction = pathLine.getPosition(0) - currentPosition;
-        float angleBetweenRad = Mathf.Atan2(direction.y, direction.x);
-        rigidBody.velocity = new Vector2(
-            Mathf.Cos(angleBetweenRad) * (carrierVelocity),
-            Mathf.Sin(angleBetweenRad) * (carrierVelocity)
-        );
+        rigidBody.velocity = transform.right * carrierVelocity;
+    }
+
+    public void startMove()
+    {
+        carrierVelocity = initialCarrierVelocity;
+    }
+
+    public void lineEnded()
+    {
+        if (!stationLanding) return;
+        if (isLanded) return;
+        isLanded = true;
+        carrierVelocity = 0f;
+        stationLanding.carrierLanded();
     }
 
     public Vector3 currentPosition
@@ -51,9 +66,22 @@ public class SpaceCarrier : MonoBehaviour
         }
     }
 
-    public void land(Vector3 landCorrectionPosition, Vector3 targetPosition)
+    public void initLanding(StationLanding stationToLand, Vector3 landCorrectionPosition, Vector3 targetPosition)
     {
-        gameObject.layer = LayerMask.NameToLayer("SpaceCarrierLanding");
+        stationLanding = stationToLand;
+        gameObject.layer = LayerMask.NameToLayer(landingLayer);
         pathLine.createLandingLine(landCorrectionPosition, targetPosition);
+    }
+
+    public void finishDeliveryProcess()
+    {
+        gameObject.layer = LayerMask.NameToLayer(deliveredLayer);
+    }
+
+    public bool isInDeliveryProcess
+    {
+        get {
+            return LayerMask.LayerToName(gameObject.layer) == landingLayer;
+        }
     }
 }

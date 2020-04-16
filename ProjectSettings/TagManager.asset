@@ -17,8 +17,8 @@ TagManager:
   - LandingTrigger
   - SpaceCarrier
   - SpaceCarrierLanding
-  - 
-  - 
+  - SpaceCarrierDelivered
+  - FinishLandingTrigger
   - 
   - 
   - 

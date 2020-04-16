@@ -32,6 +32,11 @@ public class PathLine : MonoBehaviour
 
     private void OnMouseDown()
     {
+        if (spaceCarrier.isInDeliveryProcess)
+        {
+            isCreatingPath = false;
+            return;
+        };
         isCreatingPath = true;
         pathLine.positionCount = 1;
         pathLine.SetPosition(0, getMousePosition());
@@ -46,6 +51,7 @@ public class PathLine : MonoBehaviour
 
     public void drawLine()
     {
+        if (spaceCarrier.isInDeliveryProcess) return;
         if (!isCreatingPath) return;
         if (!hasMouseMoved()) return;
         float distanceToMouse = calculateDistanceToMouse();
@@ -104,7 +110,11 @@ public class PathLine : MonoBehaviour
 
     public void updateLine()
     {
-        if (pathLine.positionCount == 0) return;
+        if (pathLine.positionCount == 0)
+        {
+            spaceCarrier.lineEnded();
+            return;
+        };
         float distance = Vector3.Distance(spaceCarrier.currentPosition, pathLine.GetPosition(0));
         if (distance > distanceToRemoveChunck) return;
         Vector3[] positions = new Vector3[pathLine.positionCount];
