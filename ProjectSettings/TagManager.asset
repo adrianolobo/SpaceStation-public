@@ -19,8 +19,8 @@ TagManager:
   - SpaceCarrierLanding
   - SpaceCarrierDelivered
   - FinishLandingTrigger
-  - 
-  - 
+  - ProximityRadar
+  - StationLanding
   - 
   - 
   - 

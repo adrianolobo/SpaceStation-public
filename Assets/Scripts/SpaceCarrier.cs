@@ -9,6 +9,8 @@ public class SpaceCarrier : MonoBehaviour
     Rigidbody2D rigidBody;
     private StationLanding stationLanding;
     private ContainerManager containerManager;
+    private Engine engine;
+    private ProximityRadar proximityRadar;
 
     private float initialCarrierVelocity = 0.5f;
     private float carrierVelocity;
@@ -21,6 +23,11 @@ public class SpaceCarrier : MonoBehaviour
     {
         containerManager = GetComponentInChildren<ContainerManager>();
         containerManager.createContainers(amountContainers);
+
+        engine = GetComponentInChildren<Engine>();
+        engine.fire();
+
+        proximityRadar = GetComponentInChildren<ProximityRadar>();
 
         carrierVelocity = initialCarrierVelocity;
         pathLine = GetComponent<PathLine>();
@@ -51,12 +58,14 @@ public class SpaceCarrier : MonoBehaviour
     public void startMove()
     {
         carrierVelocity = initialCarrierVelocity;
+        engine.fire();
     }
 
     public void lineEnded()
     {
         if (!stationLanding) return;
         if (isLanded) return;
+        engine.stop();
         isLanded = true;
         carrierVelocity = 0f;
         stationLanding.carrierLanded();

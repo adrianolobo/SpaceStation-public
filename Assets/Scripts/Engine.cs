@@ -4,15 +4,20 @@ using UnityEngine;
 
 public class Engine : MonoBehaviour
 {
-    // Start is called before the first frame update
+    private ParticleSystem engineParticles;
+
     void Start()
     {
-        
+        engineParticles = GetComponent<ParticleSystem>();
     }
 
-    // Update is called once per frame
-    void Update()
+    public void stop()
     {
-        
+        engineParticles.Stop();
+    }
+
+    public void fire()
+    {
+        engineParticles.Play();
     }
 }
