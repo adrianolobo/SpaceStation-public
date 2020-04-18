@@ -14,7 +14,7 @@ public class StationLanding : MonoBehaviour
 
     public void carrierLanded()
     {
-        StartCoroutine(deliverCargo());
+        StartCoroutine(deliverContainer());
     }
 
     public void finishLanding()
@@ -23,9 +23,14 @@ public class StationLanding : MonoBehaviour
         carrierLanding = null;
     }
 
-    IEnumerator deliverCargo()
+    IEnumerator deliverContainer()
     {
-        yield return new WaitForSeconds(1f);
+        bool hasContainer = true;
+        while(hasContainer)
+        {
+            yield return new WaitForSeconds(1f);
+            hasContainer = carrierLanding.removeContainer();
+        }
         carrierLanding.startMove();
     }
 }

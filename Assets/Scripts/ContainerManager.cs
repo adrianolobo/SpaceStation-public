@@ -5,10 +5,9 @@ using UnityEngine;
 public class ContainerManager : MonoBehaviour
 {
     public GameObject containerPrefab;
-    private GameObject[] containers = new GameObject[3];
-    void Start()
+    private List<GameObject> containers = new List<GameObject>();
+    public void createContainers(int amountToCreate)
     {
-        int amountToCreate = 3;
         for (int i = 0; i < amountToCreate; i ++)
         {
             GameObject container = Instantiate(containerPrefab, transform);
@@ -16,7 +15,16 @@ public class ContainerManager : MonoBehaviour
             float sizeX = containerSprite.sprite.rect.width / containerSprite.sprite.pixelsPerUnit;
             float padding = 2 / containerSprite.sprite.pixelsPerUnit;
             container.transform.localPosition = new Vector3((sizeX + padding) * i, 0, 0);
-            containers[i] = container;
+            containers.Add(container);
         }
+    }
+
+    public bool removeContainer()
+    {
+        if (containers.Count == 0) return false;
+        GameObject container = containers[containers.Count - 1];
+        containers.RemoveAt(containers.Count - 1);
+        Destroy(container);
+        return true;
     }
 }

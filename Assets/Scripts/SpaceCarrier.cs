@@ -8,15 +8,20 @@ public class SpaceCarrier : MonoBehaviour
     private PathLine pathLine;
     Rigidbody2D rigidBody;
     private StationLanding stationLanding;
+    private ContainerManager containerManager;
 
     private float initialCarrierVelocity = 0.5f;
     private float carrierVelocity;
     private bool isLanded = false;
+    public int amountContainers = 1;
 
     private string landingLayer = "SpaceCarrierLanding";
     private string deliveredLayer = "SpaceCarrierDelivered";
     void Start()
     {
+        containerManager = GetComponentInChildren<ContainerManager>();
+        containerManager.createContainers(amountContainers);
+
         carrierVelocity = initialCarrierVelocity;
         pathLine = GetComponent<PathLine>();
         rigidBody = GetComponent<Rigidbody2D>();
@@ -76,6 +81,11 @@ public class SpaceCarrier : MonoBehaviour
     public void finishDeliveryProcess()
     {
         gameObject.layer = LayerMask.NameToLayer(deliveredLayer);
+    }
+
+    public bool removeContainer()
+    {
+        return containerManager.removeContainer();
     }
 
     public bool isInDeliveryProcess
