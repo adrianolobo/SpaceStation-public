@@ -25,7 +25,6 @@ public class SpaceCarrier : MonoBehaviour
         containerManager.createContainers(amountContainers);
 
         engine = GetComponentInChildren<Engine>();
-        engine.fire();
 
         proximityRadar = GetComponentInChildren<ProximityRadar>();
 
