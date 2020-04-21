@@ -32,6 +32,7 @@ public class SpaceCarrier : MonoBehaviour
         pathLine = GetComponent<PathLine>();
         rigidBody = GetComponent<Rigidbody2D>();
         rigidBody.velocity = new Vector2(0, 0);
+        turnToCenter();
     }
 
     void Update()
@@ -40,6 +41,13 @@ public class SpaceCarrier : MonoBehaviour
         setAngle();
         move();
         pathLine.updateLine();
+    }
+
+    void turnToCenter()
+    {
+        Vector2 direction = new Vector3(0, 0, 0) - currentPosition;
+        float angleBetween = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+        transform.rotation = Quaternion.AngleAxis(angleBetween, Vector3.forward);
     }
 
     void setAngle()
