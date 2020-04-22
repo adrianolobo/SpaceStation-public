@@ -33,18 +33,4 @@ public class StationLanding : AbstractStationModule
         }
         carrierLanding.startMove();
     }
-    public override void move(Vector3 position)
-    {
-
-    }
-    public override void startPlacing()
-    {
-        BoxCollider2D collider2d = GetComponent<BoxCollider2D>();
-        collider2d.enabled = false;
-    }
-    public override void endPlacing()
-    {
-        BoxCollider2D collider2d = GetComponent<BoxCollider2D>();
-        collider2d.enabled = true;
-    }
 }

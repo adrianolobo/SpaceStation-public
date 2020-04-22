@@ -4,15 +4,14 @@ using UnityEngine;
 
 public class Connector : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    void OnTriggerEnter2D(Collider2D collision)
     {
-        
+        AbstractStationModule module = GetComponentInParent<AbstractStationModule>();
+        module.triggerConnect(this, collision);
+        Debug.Log("CONNECTOR TRIGGER ENTER");
     }
-
-    // Update is called once per frame
-    void Update()
+    void OnTriggerExit2D(Collider2D collision)
     {
-        
+        Debug.Log("CONNECTOR TRIGGER EXIT");
     }
 }

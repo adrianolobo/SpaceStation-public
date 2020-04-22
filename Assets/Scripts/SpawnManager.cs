@@ -11,7 +11,7 @@ public class SpawnManager : MonoBehaviour
     void Start()
     {
         resetSpawnOrder();
-        StartCoroutine(spawnProcess());
+        // StartCoroutine(spawnProcess());
     }
 
     IEnumerator spawnProcess()
@@ -42,12 +42,10 @@ public class SpawnManager : MonoBehaviour
             posY = Random.Range(minPositions.y, maxPositions.y);
         }
 
-        Debug.Log(order);
-
         Instantiate(spaceCarrier, new Vector3(posX, posY, 0), Quaternion.identity);
 
 
-        yield return new WaitForSeconds(5f);
+        yield return new WaitForSeconds(50f);
 
 
         if (spawnOrder.Count == 0) {
