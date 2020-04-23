@@ -4,14 +4,18 @@ using UnityEngine;
 
 public class Connector : MonoBehaviour
 {
+    AbstractStationModule module;
+    private void Start()
+    {
+        module = GetComponentInParent<AbstractStationModule>();
+    }
+
     void OnTriggerEnter2D(Collider2D collision)
     {
-        AbstractStationModule module = GetComponentInParent<AbstractStationModule>();
         module.triggerConnect(this, collision);
-        Debug.Log("CONNECTOR TRIGGER ENTER");
     }
     void OnTriggerExit2D(Collider2D collision)
     {
-        Debug.Log("CONNECTOR TRIGGER EXIT");
+        module.triggerConnect(null, null);
     }
 }

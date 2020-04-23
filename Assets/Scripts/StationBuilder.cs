@@ -6,22 +6,31 @@ public class StationBuilder : MonoBehaviour
 {
 
     public AbstractStationModule sationModule;
-    private AbstractStationModule moduleToPlace;
-
     void Start()
     {
-        moduleToPlace = Instantiate(sationModule);
+        createNewModule();
+        GameEvents.current.onModulePlaced += placeModule;
+    }
+
+    private void OnDestroy()
+    {
+        GameEvents.current.onModulePlaced -= placeModule;
+    }
+    void createNewModule()
+    {
+        AbstractStationModule moduleToPlace = Instantiate(sationModule);
+        moduleToPlace.move(new Vector3(2, 4, 0));
+        moduleToPlace.setOnlyVisual();
         moduleToPlace.startPlacing();
     }
 
-    void Update()
+    void placeModule(AbstractStationModule module)
     {
-        if (!moduleToPlace) return;
-        Vector3 position = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        moduleToPlace.move(position);
-        if (Input.GetMouseButtonDown(0))
-        {
-            (Connector moduleToPlaceConnector, Collider2D otherModuleConnectorCollider) = moduleToPlace.getConnectors();
-        }
+        if (!module.canConect) return;
+        (Connector moduleToPlaceConnector, Collider2D otherModuleConnectorCollider) = module.getConnectors();
+        Vector3 connectorsDifferencePosition = moduleToPlaceConnector.transform.position - otherModuleConnectorCollider.transform.position;
+        module.move(module.transform.position - connectorsDifferencePosition);
+        module.endPlacing();
+        createNewModule();
     }
 }
