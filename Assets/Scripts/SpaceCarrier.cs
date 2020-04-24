@@ -19,10 +19,10 @@ public class SpaceCarrier : MonoBehaviour
 
     private string landingLayer = "SpaceCarrierLanding";
     private string deliveredLayer = "SpaceCarrierDelivered";
-    void Start()
+    void Awake()
     {
+        Debug.Log("SPACE CARRIER");
         containerManager = GetComponentInChildren<ContainerManager>();
-        containerManager.createContainers(amountContainers);
 
         engine = GetComponentInChildren<Engine>();
 
@@ -33,6 +33,13 @@ public class SpaceCarrier : MonoBehaviour
         rigidBody = GetComponent<Rigidbody2D>();
         rigidBody.velocity = new Vector2(0, 0);
         turnToCenter();
+    }
+
+    public void createContainers(int amountContainersToCreate)
+    {
+        Debug.Log("CREATE CONTAINERS");
+        amountContainers = amountContainersToCreate;
+        containerManager.createContainers(amountContainers);
     }
 
     void Update()

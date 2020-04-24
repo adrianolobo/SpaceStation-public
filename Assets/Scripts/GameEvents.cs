@@ -15,4 +15,28 @@ public class GameEvents : MonoBehaviour
     {
         onModulePlaced?.Invoke(module);
     }
+
+    public event Action onNewModuleCreated;
+    public void newModuleCreated()
+    {
+        onNewModuleCreated?.Invoke();
+    }
+
+    public event Action onCreateNewModule;
+    public void createNewModule()
+    {
+        onCreateNewModule?.Invoke();
+    }
+
+    public event Action<int> onStartSpawnSequence;
+    public void startSpawnSequence(int amountCargos)
+    {
+        onStartSpawnSequence?.Invoke(amountCargos);
+    }
+
+    public event Action onEndSpawnSequence;
+    public void endSpawnSequence()
+    {
+        onEndSpawnSequence?.Invoke();
+    }
 }

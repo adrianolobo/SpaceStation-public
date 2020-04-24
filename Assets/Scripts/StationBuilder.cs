@@ -8,18 +8,18 @@ public class StationBuilder : MonoBehaviour
     public AbstractStationModule sationModule;
     void Start()
     {
-        createNewModule();
         GameEvents.current.onModulePlaced += placeModule;
+        GameEvents.current.onCreateNewModule += createNewModule;
     }
 
     private void OnDestroy()
     {
         GameEvents.current.onModulePlaced -= placeModule;
+        GameEvents.current.onCreateNewModule -= createNewModule;
     }
     void createNewModule()
     {
-        AbstractStationModule moduleToPlace = Instantiate(sationModule);
-        moduleToPlace.move(new Vector3(2, 4, 0));
+        AbstractStationModule moduleToPlace = Instantiate(sationModule, new Vector3(2, 4, 0), Quaternion.identity);
         moduleToPlace.setOnlyVisual();
         moduleToPlace.startPlacing();
     }
@@ -31,6 +31,7 @@ public class StationBuilder : MonoBehaviour
         Vector3 connectorsDifferencePosition = moduleToPlaceConnector.transform.position - otherModuleConnectorCollider.transform.position;
         module.move(module.transform.position - connectorsDifferencePosition);
         module.endPlacing();
-        createNewModule();
+
+        GameEvents.current.newModuleCreated();
     }
 }
