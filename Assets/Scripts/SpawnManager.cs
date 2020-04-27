@@ -8,11 +8,13 @@ public class SpawnManager : MonoBehaviour
 
     private Stack<string> spawnOrder;
 
+    private SpaceCarrierManager spaceCarrierManager;
+
     void Awake()
     {
-        Debug.Log("Sapwn Manager");
         resetSpawnOrder();
         GameEvents.current.onStartSpawnSequence += startSpawnSequence;
+        spaceCarrierManager = GetComponent<SpaceCarrierManager>();
     }
 
     private void OnDestroy()
@@ -47,19 +49,19 @@ public class SpawnManager : MonoBehaviour
 
     IEnumerator spawnSequence(Stack<int> cargosList)
     {
-        Debug.Log(cargosList);
         while (cargosList.Count > 0)
         {
             if (spawnOrder.Count == 0) resetSpawnOrder();
             string order = spawnOrder.Pop();
             Vector3 carrierPosition = getPosition(order);
             SpaceCarrier newSpaceCarrier = Instantiate(spaceCarrier, carrierPosition, Quaternion.identity);
+            spaceCarrierManager
+
             int cargos = cargosList.Pop();
             newSpaceCarrier.createContainers(cargos);
             yield return new WaitForSeconds(10f);
         }
         endSpawnSequence();
-
     }
 
     void endSpawnSequence()

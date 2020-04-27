@@ -4998,7 +4998,7 @@ GameObject:
   - component: {fileID: 4566062976097704457}
   m_Layer: 10
   m_Name: SpaceCarrier
-  m_TagString: Untagged
+  m_TagString: SpaceCarrier
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
