@@ -21,7 +21,6 @@ public class SpaceCarrier : MonoBehaviour
     private string deliveredLayer = "SpaceCarrierDelivered";
     void Awake()
     {
-        Debug.Log("SPACE CARRIER");
         containerManager = GetComponentInChildren<ContainerManager>();
 
         engine = GetComponentInChildren<Engine>();
@@ -37,7 +36,6 @@ public class SpaceCarrier : MonoBehaviour
 
     public void createContainers(int amountContainersToCreate)
     {
-        Debug.Log("CREATE CONTAINERS");
         amountContainers = amountContainersToCreate;
         containerManager.createContainers(amountContainers);
     }

@@ -39,4 +39,10 @@ public class GameEvents : MonoBehaviour
     {
         onEndSpawnSequence?.Invoke();
     }
+
+    public event Action<int> onCargosDelivered;
+    public void cargosDelivered(int amountCargosDelivered)
+    {
+        onCargosDelivered?.Invoke(amountCargosDelivered);
+    }
 }

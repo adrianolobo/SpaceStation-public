@@ -63,13 +63,11 @@ abstract public class AbstractStationModule : MonoBehaviour
     {
         if (collision.gameObject.tag == "Connector") return;
         triggerCount++;
-        Debug.Log("TRIGGER ENTER");
     }
     virtual protected void OnTriggerExit2D(Collider2D collision)
     {
         if (collision.gameObject.tag == "Connector") return;
         triggerCount--;
-        Debug.Log("TRIGGER EXIT");
     }
     virtual public void startPlacing()
     {

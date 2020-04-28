@@ -24,7 +24,6 @@ public class SpawnManager : MonoBehaviour
 
     public void startSpawnSequence(int amountOfCargos)
     {
-        Debug.Log("START SPAWN SEQUENCE");
         int cargosLeftToAdd = amountOfCargos;
         Stack<int> cargosList = new Stack<int>();
 
@@ -55,7 +54,7 @@ public class SpawnManager : MonoBehaviour
             string order = spawnOrder.Pop();
             Vector3 carrierPosition = getPosition(order);
             SpaceCarrier newSpaceCarrier = Instantiate(spaceCarrier, carrierPosition, Quaternion.identity);
-            spaceCarrierManager
+            spaceCarrierManager.addSpaceCarrier(newSpaceCarrier);
 
             int cargos = cargosList.Pop();
             newSpaceCarrier.createContainers(cargos);

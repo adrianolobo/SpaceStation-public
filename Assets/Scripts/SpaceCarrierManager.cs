@@ -4,15 +4,21 @@ using UnityEngine;
 
 public class SpaceCarrierManager : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    List<SpaceCarrier> spaceCarrierList = new List<SpaceCarrier>();
+
+    private void Start()
     {
-        
+        BoxCollider2D boxCollider = GetComponent<BoxCollider2D>();
+        boxCollider.size = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width * 2, Screen.height * 2, 0));
     }
 
-    // Update is called once per frame
-    void Update()
+    private void OnTriggerExit2D(Collider2D collision)
     {
-        
+        Debug.Log(collision);
+    }
+
+    public void addSpaceCarrier(SpaceCarrier spaceCarrier)
+    {
+        spaceCarrierList.Add(spaceCarrier);
     }
 }

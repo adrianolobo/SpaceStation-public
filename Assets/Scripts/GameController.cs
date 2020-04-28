@@ -6,7 +6,6 @@ public class GameController : MonoBehaviour
 {
     private void Start()
     {
-        Debug.Log("Game Controller");
         GameEvents.current.onEndSpawnSequence += spawnSequenceEnded;
         GameEvents.current.onNewModuleCreated += placeModuleEnded;
 
@@ -21,7 +20,7 @@ public class GameController : MonoBehaviour
 
     void spawnSequence()
     {
-        GameEvents.current.startSpawnSequence(10);
+        GameEvents.current.startSpawnSequence(2);
     }
 
     void spawnSequenceEnded()
