@@ -6,15 +6,36 @@ public class SpaceCarrierManager : MonoBehaviour
 {
     List<SpaceCarrier> spaceCarrierList = new List<SpaceCarrier>();
 
-    private void Start()
+    private void Update()
     {
-        BoxCollider2D boxCollider = GetComponent<BoxCollider2D>();
-        boxCollider.size = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width * 2, Screen.height * 2, 0));
+        checkOffscreen();
     }
 
-    private void OnTriggerExit2D(Collider2D collision)
+    void checkOffscreen()
     {
-        Debug.Log(collision);
+        List<SpaceCarrier> offScreenSpaceCarriers = new List<SpaceCarrier>();
+        for (int i = 0; i < spaceCarrierList.Count; i++)
+        {
+            SpaceCarrier spaceCarrier = spaceCarrierList[i];
+            bool isVisible = spaceCarrier.GetComponent<Renderer>().isVisible;
+            if (isVisible) {
+                spaceCarrier.enteredScreen();
+                continue;
+            };
+            offScreenSpaceCarriers.Add(spaceCarrier);
+        }
+        for (int i = 0; i < offScreenSpaceCarriers.Count; i++)
+        {
+            SpaceCarrier offScreenSpaceCarrier = offScreenSpaceCarriers[i];
+            if (!offScreenSpaceCarrier.getHasAlreadyEnteredScreen()) continue;
+            if (offScreenSpaceCarrier.hasDelivered)
+            {
+                GameEvents.current.cargosDelivered(offScreenSpaceCarrier.getAmountOfContainers());
+            }
+            spaceCarrierList.Remove(offScreenSpaceCarrier);
+            Destroy(offScreenSpaceCarrier.gameObject);
+        }
+
     }
 
     public void addSpaceCarrier(SpaceCarrier spaceCarrier)

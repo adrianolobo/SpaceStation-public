@@ -4,9 +4,10 @@ using UnityEngine;
 
 public class GameController : MonoBehaviour
 {
+    private int currentCargos = 5;
     private void Start()
     {
-        GameEvents.current.onEndSpawnSequence += spawnSequenceEnded;
+        GameEvents.current.onCargosDelivered += cargosDelivered;
         GameEvents.current.onNewModuleCreated += placeModuleEnded;
 
         spawnSequence();
@@ -14,18 +15,22 @@ public class GameController : MonoBehaviour
 
     private void OnDestroy()
     {
-        GameEvents.current.onEndSpawnSequence -= spawnSequenceEnded;
+        GameEvents.current.onCargosDelivered -= cargosDelivered;
         GameEvents.current.onNewModuleCreated -= placeModuleEnded;
+    }
+
+    void cargosDelivered(int amountCargos)
+    {
+        currentCargos -= amountCargos;
+        if (currentCargos > 0) return;
+        currentCargos = 4;
+        placeModule();
+
     }
 
     void spawnSequence()
     {
-        GameEvents.current.startSpawnSequence(2);
-    }
-
-    void spawnSequenceEnded()
-    {
-        placeModule();   
+        GameEvents.current.startSpawnSequence(currentCargos);
     }
 
     void placeModule()

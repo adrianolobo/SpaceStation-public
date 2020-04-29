@@ -11,11 +11,12 @@ public class SpaceCarrier : MonoBehaviour
     private ContainerManager containerManager;
     private Engine engine;
     private ProximityRadar proximityRadar;
+    private bool hasAlreadyEnteredScreen = false;
 
     private float initialCarrierVelocity = 0.5f;
     private float carrierVelocity;
     private bool isLanded = false;
-    public int amountContainers = 1;
+    private int amountContainers = 1;
 
     private string landingLayer = "SpaceCarrierLanding";
     private string deliveredLayer = "SpaceCarrierDelivered";
@@ -108,6 +109,29 @@ public class SpaceCarrier : MonoBehaviour
     {
         return containerManager.removeContainer();
     }
+
+    public bool getHasAlreadyEnteredScreen()
+    {
+        return hasAlreadyEnteredScreen;
+    }
+
+    public int getAmountOfContainers()
+    {
+        return amountContainers;
+    }
+
+    public void enteredScreen()
+    {
+        hasAlreadyEnteredScreen = true;
+    }
+
+    public bool hasDelivered
+    {
+        get
+        {
+            return LayerMask.LayerToName(gameObject.layer) == deliveredLayer;
+        }
+    } 
 
     public bool isInDeliveryProcess
     {

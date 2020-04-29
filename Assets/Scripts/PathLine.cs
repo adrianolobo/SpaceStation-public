@@ -51,6 +51,11 @@ public class PathLine : MonoBehaviour
 
     public void drawLine()
     {
+        if (!spaceCarrier)
+        {
+            Debug.Log("BUG");
+            return;
+        }
         if (spaceCarrier.isInDeliveryProcess) return;
         if (!isCreatingPath) return;
         if (!hasMouseMoved()) return;
