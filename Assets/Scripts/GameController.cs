@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class GameController : MonoBehaviour
 {
-    private int currentCargos = 5;
+    private int currentCargos = 10;
     private void Start()
     {
         GameEvents.current.onCargosDelivered += cargosDelivered;
@@ -23,7 +23,7 @@ public class GameController : MonoBehaviour
     {
         currentCargos -= amountCargos;
         if (currentCargos > 0) return;
-        currentCargos = 4;
+        currentCargos = 10;
         placeModule();
 
     }

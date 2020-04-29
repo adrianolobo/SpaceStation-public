@@ -13,10 +13,10 @@ public class SpaceCarrier : MonoBehaviour
     private ProximityRadar proximityRadar;
     private bool hasAlreadyEnteredScreen = false;
 
-    private float initialCarrierVelocity = 0.5f;
-    private float carrierVelocity;
     private bool isLanded = false;
     private int amountContainers = 1;
+    private float carrierVelocity = 0f;
+    private float[] velocityByContainers = new float[] { 1, 0.8f, 0.5f, 0.3f };
 
     private string landingLayer = "SpaceCarrierLanding";
     private string deliveredLayer = "SpaceCarrierDelivered";
@@ -28,7 +28,6 @@ public class SpaceCarrier : MonoBehaviour
 
         proximityRadar = GetComponentInChildren<ProximityRadar>();
 
-        carrierVelocity = initialCarrierVelocity;
         pathLine = GetComponent<PathLine>();
         rigidBody = GetComponent<Rigidbody2D>();
         rigidBody.velocity = new Vector2(0, 0);
@@ -38,6 +37,7 @@ public class SpaceCarrier : MonoBehaviour
     public void createContainers(int amountContainersToCreate)
     {
         amountContainers = amountContainersToCreate;
+        carrierVelocity = velocityByContainers[amountContainers];
         containerManager.createContainers(amountContainers);
     }
 
@@ -70,7 +70,7 @@ public class SpaceCarrier : MonoBehaviour
 
     public void startMove()
     {
-        carrierVelocity = initialCarrierVelocity;
+        carrierVelocity = velocityByContainers[0];
         engine.fire();
     }
 

@@ -58,7 +58,7 @@ public class SpawnManager : MonoBehaviour
 
             int cargos = cargosList.Pop();
             newSpaceCarrier.createContainers(cargos);
-            yield return new WaitForSeconds(10f);
+            yield return new WaitForSeconds(Random.Range(3, 10));
         }
         endSpawnSequence();
     }
