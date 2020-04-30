@@ -5,6 +5,21 @@ using UnityEngine;
 public class StationLanding : AbstractStationModule
 {
     private SpaceCarrier carrierLanding;
+
+    private Coroutine deliverContainerCoroutine = null;
+
+    private void Start()
+    {
+        GameEvents.current.onCreateNewModule += stopDelivery;
+        GameEvents.current.onNewModuleCreated += startDelivery;
+    }
+
+    private void stopDelivery()
+    {
+        if (deliverContainerCoroutine == null) return;
+        StopCoroutine(deliverContainerCoroutine);
+    }
+
     public void landCarrier(SpaceCarrier carrier, Vector3 landingCorrectionPosition)
     {
         if (carrierLanding) return;
@@ -12,9 +27,9 @@ public class StationLanding : AbstractStationModule
         carrier.initLanding(this, landingCorrectionPosition, transform.position);
     }
 
-    public void carrierLanded()
+    public void startDelivery()
     {
-        StartCoroutine(deliverContainer());
+        deliverContainerCoroutine = StartCoroutine(deliverContainer());
     }
 
     public void finishLanding()
@@ -30,7 +45,15 @@ public class StationLanding : AbstractStationModule
         {
             yield return new WaitForSeconds(1f);
             hasContainer = carrierLanding.removeContainer();
+
+            if (carrierLanding.getAmountOfContainers() > 0)
+            {
+                GameEvents.current.cargosDelivered(1);
+            }
         }
         carrierLanding.startMove();
+        deliverContainerCoroutine = null;
+        // The last one must be executed here because if its the last it will stop the movement of StartMove();
+        GameEvents.current.cargosDelivered(1);
     }
 }

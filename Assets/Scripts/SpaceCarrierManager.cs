@@ -28,10 +28,6 @@ public class SpaceCarrierManager : MonoBehaviour
         {
             SpaceCarrier offScreenSpaceCarrier = offScreenSpaceCarriers[i];
             if (!offScreenSpaceCarrier.getHasAlreadyEnteredScreen()) continue;
-            if (offScreenSpaceCarrier.hasDelivered)
-            {
-                GameEvents.current.cargosDelivered(offScreenSpaceCarrier.getAmountOfContainers());
-            }
             spaceCarrierList.Remove(offScreenSpaceCarrier);
             Destroy(offScreenSpaceCarrier.gameObject);
         }

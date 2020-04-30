@@ -16,7 +16,7 @@ public class SpaceCarrier : MonoBehaviour
     private bool isLanded = false;
     private int amountContainers = 1;
     private float carrierVelocity = 0f;
-    private float[] velocityByContainers = new float[] { 1, 0.8f, 0.5f, 0.3f };
+    private float[] velocityByContainers = new float[] { 0.8f, 0.6f, 0.4f, 0.2f };
 
     private string landingLayer = "SpaceCarrierLanding";
     private string deliveredLayer = "SpaceCarrierDelivered";
@@ -32,13 +32,22 @@ public class SpaceCarrier : MonoBehaviour
         rigidBody = GetComponent<Rigidbody2D>();
         rigidBody.velocity = new Vector2(0, 0);
         turnToCenter();
+
+        GameEvents.current.onCreateNewModule += stopMoving;
+        GameEvents.current.onNewModuleCreated += resumeMoving;
+    }
+
+    private void OnDestroy()
+    {
+        GameEvents.current.onCreateNewModule -= stopMoving;
+        GameEvents.current.onNewModuleCreated -= resumeMoving;
     }
 
     public void createContainers(int amountContainersToCreate)
     {
         amountContainers = amountContainersToCreate;
-        carrierVelocity = velocityByContainers[amountContainers];
         containerManager.createContainers(amountContainers);
+        setVelocityByContainers();
     }
 
     void Update()
@@ -68,10 +77,21 @@ public class SpaceCarrier : MonoBehaviour
         rigidBody.velocity = transform.right * carrierVelocity;
     }
 
+    void resumeMoving()
+    {
+        if (isLanded) return;
+        startMove();
+    }
+
     public void startMove()
     {
-        carrierVelocity = velocityByContainers[0];
+        setVelocityByContainers();
         engine.fire();
+    }
+
+    private void stopMoving()
+    {
+        carrierVelocity = 0f;
     }
 
     public void lineEnded()
@@ -80,8 +100,13 @@ public class SpaceCarrier : MonoBehaviour
         if (isLanded) return;
         engine.stop();
         isLanded = true;
-        carrierVelocity = 0f;
-        stationLanding.carrierLanded();
+        stopMoving();
+        stationLanding.startDelivery();
+    }
+
+    private void setVelocityByContainers()
+    {
+        carrierVelocity = velocityByContainers[containerManager.getContainersCount()];
     }
 
     public Vector3 currentPosition
@@ -117,7 +142,7 @@ public class SpaceCarrier : MonoBehaviour
 
     public int getAmountOfContainers()
     {
-        return amountContainers;
+        return containerManager.getContainersCount();
     }
 
     public void enteredScreen()

@@ -27,4 +27,9 @@ public class ContainerManager : MonoBehaviour
         Destroy(container);
         return true;
     }
+
+    public int getContainersCount()
+    {
+        return containers.Count;
+    }
 }

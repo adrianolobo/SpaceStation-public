@@ -28,10 +28,10 @@ public class GameEvents : MonoBehaviour
         onCreateNewModule?.Invoke();
     }
 
-    public event Action<int> onStartSpawnSequence;
-    public void startSpawnSequence(int amountCargos)
+    public event Action onStartSpawnSequence;
+    public void startSpawnSequence()
     {
-        onStartSpawnSequence?.Invoke(amountCargos);
+        onStartSpawnSequence?.Invoke();
     }
 
     public event Action onEndSpawnSequence;

@@ -10,62 +10,71 @@ public class SpawnManager : MonoBehaviour
 
     private SpaceCarrierManager spaceCarrierManager;
 
+    private Coroutine spawnCoroutine;
+
     void Awake()
     {
         resetSpawnOrder();
         GameEvents.current.onStartSpawnSequence += startSpawnSequence;
         spaceCarrierManager = GetComponent<SpaceCarrierManager>();
+
+        GameEvents.current.onCreateNewModule += pauseSpawn;
+        GameEvents.current.onNewModuleCreated += resumeSpawn;
     }
 
     private void OnDestroy()
     {
         GameEvents.current.onStartSpawnSequence -= startSpawnSequence;
+        GameEvents.current.onCreateNewModule -= pauseSpawn;
+        GameEvents.current.onNewModuleCreated -= resumeSpawn;
+    }
+    private void pauseSpawn()
+    {
+        StopCoroutine(spawnCoroutine);
     }
 
-    public void startSpawnSequence(int amountOfCargos)
+    private void resumeSpawn()
     {
-        int cargosLeftToAdd = amountOfCargos;
-        Stack<int> cargosList = new Stack<int>();
+        spawnCoroutine = StartCoroutine(spawnSequence());
+    }
 
+    private void startSpawnSequence()
+    {
+        createCarrier();
+        spawnCoroutine = StartCoroutine(spawnSequence());
+    }
+    private int getAmountCargos()
+    {
         // 50% chance of 2 cargos
         // 25% and 25% for 1 and 2 cargos;
         // if less than 3, the amount that is left is added
-        while (cargosLeftToAdd > 0)
-        {
-            float cargoChance = Random.Range(0, 100);
-            int cargoToAdd = 3;
+        float cargoChance = Random.Range(0, 100);
 
-
-            if (cargosLeftToAdd < 3) cargoToAdd = cargosLeftToAdd;
-            else if (cargoChance < 50) cargoToAdd = 2;
-            else if (cargoChance < 75) cargoToAdd = 1;
-
-            cargosList.Push(cargoToAdd);
-            cargosLeftToAdd -= cargoToAdd;
-        }
-        StartCoroutine(spawnSequence(cargosList));
+        if (cargoChance < 50) return 2;
+        else if (cargoChance < 75) return 1;
+        return 3;
     }
 
-    IEnumerator spawnSequence(Stack<int> cargosList)
+    IEnumerator spawnSequence()
     {
-        while (cargosList.Count > 0)
+        // TODO: CREATE A STOP FLAG
+        while (true)
         {
-            if (spawnOrder.Count == 0) resetSpawnOrder();
-            string order = spawnOrder.Pop();
-            Vector3 carrierPosition = getPosition(order);
-            SpaceCarrier newSpaceCarrier = Instantiate(spaceCarrier, carrierPosition, Quaternion.identity);
-            spaceCarrierManager.addSpaceCarrier(newSpaceCarrier);
-
-            int cargos = cargosList.Pop();
-            newSpaceCarrier.createContainers(cargos);
-            yield return new WaitForSeconds(Random.Range(3, 10));
+            yield return new WaitForSeconds(Random.Range(7, 14));
+            createCarrier();
         }
-        endSpawnSequence();
     }
 
-    void endSpawnSequence()
+    private void createCarrier()
     {
-        GameEvents.current.endSpawnSequence();
+        if (spawnOrder.Count == 0) resetSpawnOrder();
+        string order = spawnOrder.Pop();
+        Vector3 carrierPosition = getPosition(order);
+        SpaceCarrier newSpaceCarrier = Instantiate(spaceCarrier, carrierPosition, Quaternion.identity);
+        spaceCarrierManager.addSpaceCarrier(newSpaceCarrier);
+
+        int cargos = getAmountCargos();
+        newSpaceCarrier.createContainers(cargos);
     }
 
     private Vector3 getPosition(string order)
