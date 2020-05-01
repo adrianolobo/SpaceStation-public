@@ -84,22 +84,23 @@ public class SpawnManager : MonoBehaviour
 
         float posY = 0;
         float posX = 0;
+        float padding = 1;
 
         if (order == "top")
         {
             posX = Random.Range(minPositions.x, maxPositions.x);
-            posY = maxPositions.y;
+            posY = maxPositions.y + padding;
         } else if (order == "right")
         {
-            posX = maxPositions.x;
+            posX = maxPositions.x + padding;
             posY = Random.Range(minPositions.y, maxPositions.y);
         } else if (order == "bottom")
         {
             posX = Random.Range(minPositions.x, maxPositions.x);
-            posY = minPositions.y;
+            posY = minPositions.y - padding;
         } else if (order == "left")
         {
-            posX = minPositions.x;
+            posX = minPositions.x - padding;
             posY = Random.Range(minPositions.y, maxPositions.y);
         }
 

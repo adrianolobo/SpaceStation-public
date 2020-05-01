@@ -17,8 +17,7 @@ public class SpaceCarrierManager : MonoBehaviour
         for (int i = 0; i < spaceCarrierList.Count; i++)
         {
             SpaceCarrier spaceCarrier = spaceCarrierList[i];
-            bool isVisible = spaceCarrier.GetComponent<Renderer>().isVisible;
-            if (isVisible) {
+            if (spaceCarrier.isVisible) {
                 spaceCarrier.enteredScreen();
                 continue;
             };

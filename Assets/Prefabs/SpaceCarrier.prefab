@@ -4946,7 +4946,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1191389006259086661}
-  - component: {fileID: 8053890079756549162}
+  - component: {fileID: 3586358233213327958}
   m_Layer: 10
   m_Name: ContainerManager
   m_TagString: Untagged
@@ -4968,7 +4968,7 @@ Transform:
   m_Father: {fileID: 4566062976097704452}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &8053890079756549162
+--- !u!114 &3586358233213327958
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -4996,6 +4996,7 @@ GameObject:
   - component: {fileID: 4566062976097704455}
   - component: {fileID: 4566062976097704456}
   - component: {fileID: 4566062976097704457}
+  - component: {fileID: 4909670607276150895}
   m_Layer: 10
   m_Name: SpaceCarrier
   m_TagString: SpaceCarrier
@@ -5083,7 +5084,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1240904ec2a8efc438d803fa881a5af3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  amountContainers: 3
 --- !u!61 &4566062976097704453
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -5243,3 +5243,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   minimalLineChunck: 0.15
   distanceToRemoveChunck: 0.08
+--- !u!114 &4909670607276150895
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4566062976097704450}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0fe4ab65e480d8b4483071f916705b71, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  OffscreenIndicatorPrefab: {fileID: 8308042673556347920, guid: aefb8418cbcdfd1419dcf9e21773f3e3, type: 3}

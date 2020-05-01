@@ -15,7 +15,7 @@ public class SpaceCarrier : MonoBehaviour
 
     private bool isLanded = false;
     private int amountContainers = 1;
-    private float carrierVelocity = 0f;
+    private float carrierVelocity = 1f;
     private float[] velocityByContainers = new float[] { 0.8f, 0.6f, 0.4f, 0.2f };
 
     private string landingLayer = "SpaceCarrierLanding";
@@ -148,6 +148,14 @@ public class SpaceCarrier : MonoBehaviour
     public void enteredScreen()
     {
         hasAlreadyEnteredScreen = true;
+    }
+
+    public bool isVisible
+    {
+        get
+        {
+            return GetComponent<Renderer>().isVisible;
+        }
     }
 
     public bool hasDelivered
