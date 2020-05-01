@@ -11,7 +11,7 @@ public class PathLine : MonoBehaviour
     bool isCreatingPath = false;
     Vector3 lastMousePosition;
 
-    public float minimalLineChunck = 0.15f;
+    public float minimalLineChunck = 0.02f;
     public float distanceToRemoveChunck = 0.08f;
     void Start()
     {

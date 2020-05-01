@@ -20,7 +20,6 @@ abstract public class AbstractStationModule : MonoBehaviour
     public void moveToMousePosition()
     {
         Vector3 position = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        position.y += 0.25f;
         move(position);
     }
 
