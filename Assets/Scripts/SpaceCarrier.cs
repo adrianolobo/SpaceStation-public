@@ -16,7 +16,7 @@ public class SpaceCarrier : MonoBehaviour
     private bool isLanded = false;
     private int amountContainers = 1;
     private float carrierVelocity = 1f;
-    private float[] velocityByContainers = new float[] { 0.8f, 0.6f, 0.4f, 0.2f };
+    private float[] velocityByContainers = new float[] { 1f, 0.8f, 0.6f, 0.4f };
 
     private string landingLayer = "SpaceCarrierLanding";
     private string deliveredLayer = "SpaceCarrierDelivered";
