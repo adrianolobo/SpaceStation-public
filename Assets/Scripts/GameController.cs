@@ -9,8 +9,6 @@ public class GameController : MonoBehaviour
     {
         GameEvents.current.onCargosDelivered += cargosDelivered;
         GameEvents.current.onNewModuleCreated += placeModuleEnded;
-
-        spawnSequence();
     }
 
     private void OnDestroy()

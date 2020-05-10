@@ -1,0 +1,40 @@
+﻿:root {
+    -unity-font: url('/Assets/Fonts/Montserrat-Light.ttf');
+    font-size: 24px;
+    color: #fff;
+}
+
+.screen {
+    flex-grow: 1;
+    width: 100%;
+    height: 100%;
+    align-items: center;
+    justify-content: center;
+}
+
+.play-btn {
+    position: absolute;
+    bottom: 15%;
+    width: 50%;
+    padding: 10px 20px;
+}
+
+.start-screen {
+    flex-grow: 1;
+    width: 100%;
+    height: 100%;
+    position: relative;
+    align-items: center;
+    justify-content: center;
+}
+
+.btn {
+    align-items: center;
+    justify-content: center;
+    color: #03b9fd;
+    -unity-text-align: middle-center;
+    border-color: #03b9fd;
+    border-width: 1px;
+    background-color: #034d76;
+    border-radius: 3px;
+}
