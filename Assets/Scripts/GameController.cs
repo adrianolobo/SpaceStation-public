@@ -21,11 +21,6 @@ public class GameController : MonoBehaviour
 
     void cargosDelivered(int amountCargos)
     {
-        currentCargos -= amountCargos;
-        if (currentCargos > 0) return;
-        currentCargos = 5;
-        placeModule();
-
     }
 
     void spawnSequence()

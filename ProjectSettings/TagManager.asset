@@ -25,7 +25,7 @@ TagManager:
   - StationLanding
   - Connector
   - Space
-  - 
+  - ModuleConnector
   - 
   - 
   - 
@@ -42,4 +42,16 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Background
+    uniqueID: 3790813517
+    locked: 0
+  - name: Stars
+    uniqueID: 2843513685
+    locked: 0
+  - name: SpaceStation
+    uniqueID: 2108813535
+    locked: 0
+  - name: CargoShip
+    uniqueID: 3034910115
     locked: 0

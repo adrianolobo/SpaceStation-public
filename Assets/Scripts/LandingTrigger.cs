@@ -14,6 +14,7 @@ public class LandingTrigger : MonoBehaviour
     {
         SpaceCarrier spaceCarrier = collision.gameObject.GetComponent<SpaceCarrier>();
         Vector3 landingCorrectionPosition = transform.position;
+        landingCorrectionPosition.z = 0;
         stationLanding.landCarrier(spaceCarrier, landingCorrectionPosition);
     }
 }

@@ -24,7 +24,9 @@ public class StationLanding : AbstractStationModule
     {
         if (carrierLanding) return;
         carrierLanding = carrier;
-        carrier.initLanding(this, landingCorrectionPosition, transform.position);
+        Vector3 stationLandingPosition = transform.position;
+        stationLandingPosition.z = 0;
+        carrier.initLanding(this, landingCorrectionPosition, stationLandingPosition);
     }
 
     public void startDelivery()
