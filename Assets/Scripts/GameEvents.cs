@@ -45,4 +45,9 @@ public class GameEvents : MonoBehaviour
     {
         onCargosDelivered?.Invoke(amountCargosDelivered);
     }
+    public event Action onPlayBtnClicked;
+    public void playBtnClicked()
+    {
+        onPlayBtnClicked?.Invoke();
+    }
 }

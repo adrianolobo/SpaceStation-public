@@ -4,9 +4,18 @@
     xmlns="UnityEngine.UIElements"
     xsi:noNamespaceSchemaLocation="../UIElementsSchema/UIElements.xsd"
     xsi:schemaLocation="UnityEngine.UIElements ../UIElementsSchema/UnityEngine.UIElements.xsd">
-  <VisualElement name="screen" class="screen">
-    <VisualElement class="start-screen">
-      <Button class="play-btn btn" name="play-btn" text="PLAY"/>
+    <VisualElement name="screen" class="screen">
+        <VisualElement class="start-screen" name="start-screen">
+            <Label text="Space Station" class="title-label"/>
+            <Box class="play-btn-container">
+                <Label class="arrows" text="&lt;" />
+                <Button class="play-btn" name="play-btn" text="PLAY"/>
+                <Label class="arrows" text="&gt;" />
+            </Box>
+            <Box class="next-prev-container">
+                <Button class="prev-btn" name="next-btn" text="&lt;"/>
+                <Button class="next-btn" name="next-btn" text="&gt;"/>
+            </Box>
+        </VisualElement>
     </VisualElement>
-  </VisualElement>
 </UXML>

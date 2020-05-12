@@ -7,31 +7,16 @@ public class GameController : MonoBehaviour
     private int currentCargos = 5;
     private void Start()
     {
-        GameEvents.current.onCargosDelivered += cargosDelivered;
-        GameEvents.current.onNewModuleCreated += placeModuleEnded;
+        GameEvents.current.onPlayBtnClicked += spawnSequence;
     }
 
     private void OnDestroy()
     {
-        GameEvents.current.onCargosDelivered -= cargosDelivered;
-        GameEvents.current.onNewModuleCreated -= placeModuleEnded;
-    }
-
-    void cargosDelivered(int amountCargos)
-    {
+        GameEvents.current.onPlayBtnClicked -= spawnSequence;
     }
 
     void spawnSequence()
     {
         GameEvents.current.startSpawnSequence();
-    }
-
-    void placeModule()
-    {
-        GameEvents.current.createNewModule();
-    }
-
-    void placeModuleEnded()
-    {
     }
 }
