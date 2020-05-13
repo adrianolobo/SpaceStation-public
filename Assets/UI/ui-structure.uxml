@@ -13,7 +13,7 @@
                 <Label class="arrows" text="&gt;" />
             </Box>
             <Box class="next-prev-container">
-                <Button class="prev-btn" name="next-btn" text="&lt;"/>
+                <Button class="prev-btn" name="prev-btn" text="&lt;"/>
                 <Button class="next-btn" name="next-btn" text="&gt;"/>
             </Box>
         </VisualElement>

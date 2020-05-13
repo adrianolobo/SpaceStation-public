@@ -4,8 +4,6 @@
     color: #03b9fd;
 }
 
-
-
 .btn {
     align-items: center;
     justify-content: center;
@@ -80,4 +78,8 @@
     position: relative;
     align-items: center;
     justify-content: center;
+}
+
+.start-screen_disabled {
+    display: none;
 }

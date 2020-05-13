@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class GameController : MonoBehaviour
 {
-    private int currentCargos = 5;
+    bool isPlaying = false;
     private void Start()
     {
         GameEvents.current.onPlayBtnClicked += spawnSequence;
@@ -17,6 +17,8 @@ public class GameController : MonoBehaviour
 
     void spawnSequence()
     {
+        if (isPlaying) return;
+        isPlaying = true;
         GameEvents.current.startSpawnSequence();
     }
 }
