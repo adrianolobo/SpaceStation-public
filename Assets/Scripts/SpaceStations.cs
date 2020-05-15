@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
 
-public class SpaceStations : MonoBehaviour
+public class SpaceStations : Singleton<SpaceStations>
 {
-    public GameObject[] spaceStationsPrefabs;
-    private List<GameObject> spaceStations = new List<GameObject>();
+    public SpaceStation[] spaceStationsPrefabs;
+    private List<SpaceStation> spaceStations = new List<SpaceStation>();
     private Vector3 screenSize;
-    private GameObject selectedStation;
+    private SpaceStation selectedStation;
 
     private void Start()
     {
@@ -21,9 +21,9 @@ public class SpaceStations : MonoBehaviour
     {
         for (int i = 0; i < spaceStationsPrefabs.Length; i++)
         {
-            GameObject spaceStationPrefab = spaceStationsPrefabs[i];
+            SpaceStation spaceStationPrefab = spaceStationsPrefabs[i];
 
-            GameObject spaceStation = Instantiate(spaceStationPrefab, transform);
+            SpaceStation spaceStation = Instantiate(spaceStationPrefab, transform);
             float stationPosX = screenSize.x * 2 * i;
             spaceStation.transform.localPosition = new Vector3(stationPosX, 0, 0);
             spaceStations.Add(spaceStation);
@@ -50,6 +50,11 @@ public class SpaceStations : MonoBehaviour
     {
         transform.DOMoveX(-selectedIndex * screenSize.x * 2, 0.8f)
         .SetEase(Ease.InOutQuint);
+    }
+    
+    public SpaceStation getSelected()
+    {
+        return this.selectedStation;
     }
 
     int selectedIndex

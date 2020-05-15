@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SpaceCarrierManager : MonoBehaviour
+public class SpaceCarrierManager : Singleton<SpaceCarrierManager>
 {
     List<SpaceCarrier> spaceCarrierList = new List<SpaceCarrier>();
 
@@ -31,6 +31,15 @@ public class SpaceCarrierManager : MonoBehaviour
             Destroy(offScreenSpaceCarrier.gameObject);
         }
 
+    }
+
+    public void destroyAll()
+    {
+        for (int i = 0; i < spaceCarrierList.Count; i++)
+        {
+            Destroy(spaceCarrierList[i].gameObject);
+        }
+        spaceCarrierList = new List<SpaceCarrier>();
     }
 
     public void addSpaceCarrier(SpaceCarrier spaceCarrier)

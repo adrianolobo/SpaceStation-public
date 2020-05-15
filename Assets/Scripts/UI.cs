@@ -5,7 +5,7 @@ using Unity.UIElements.Runtime;
 using UnityEngine.UIElements;
 using DG.Tweening;
 
-public class UI : MonoBehaviour
+public class UI : Singleton<UI>
 {
     private PanelRenderer ui;
     private Button playBtn;
@@ -13,11 +13,9 @@ public class UI : MonoBehaviour
     private Button prevBtn;
     private VisualElement startScreen;
     private bool isScreenDisappearing = false;
-    private SpaceStations spaceStations;
 
     private void Awake()
     {
-        spaceStations = GameObject.Find("SpaceStations").GetComponent<SpaceStations>();
         ui = GetComponent<PanelRenderer>();
         ui.postUxmlReload = BindUI;
     }
@@ -32,17 +30,17 @@ public class UI : MonoBehaviour
 
         playBtn.clickable.clicked += () =>
         {
-            GameEvents.current.playBtnClicked();
+            GameController.Instance.play();
             startScreenDisapear();
         };
 
         nextBtn.clickable.clicked += () =>
         {
-            spaceStations.next();
+            SpaceStations.Instance.next();
         };
         prevBtn.clickable.clicked += () =>
         {
-            spaceStations.prev();
+            SpaceStations.Instance.prev();
         };
         return null;
     }

@@ -2,23 +2,31 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GameController : MonoBehaviour
+
+public class GameController : Singleton<GameController>
 {
-    bool isPlaying = false;
+    private enum STATE { START, PLAYING, GAME_OVER };
+    STATE gameState;
     private void Start()
     {
-        GameEvents.current.onPlayBtnClicked += spawnSequence;
+        gameState = STATE.START;
     }
 
-    private void OnDestroy()
+    public void gameOver()
     {
-        GameEvents.current.onPlayBtnClicked -= spawnSequence;
+        if (isGameOver) return;
+        gameState = STATE.GAME_OVER;
+        SpaceCarrierManager.Instance.destroyAll();
     }
 
-    void spawnSequence()
+    public void play()
     {
         if (isPlaying) return;
-        isPlaying = true;
+        gameState = STATE.PLAYING;
+        SpawnManager.Instance.startSpawnSequence();
         GameEvents.current.startSpawnSequence();
     }
+
+    public bool isPlaying { get { return gameState == STATE.PLAYING; } }
+    public bool isGameOver { get { return gameState == STATE.GAME_OVER; } }
 }

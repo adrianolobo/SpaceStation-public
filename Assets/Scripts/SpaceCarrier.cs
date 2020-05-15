@@ -33,13 +33,16 @@ public class SpaceCarrier : MonoBehaviour
         rigidBody.velocity = new Vector2(0, 0);
         turnToCenter();
 
-        GameEvents.current.onCreateNewModule += stopMoving;
         GameEvents.current.onNewModuleCreated += resumeMoving;
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        GameController.Instance.gameOver();
     }
 
     private void OnDestroy()
     {
-        GameEvents.current.onCreateNewModule -= stopMoving;
         GameEvents.current.onNewModuleCreated -= resumeMoving;
     }
 

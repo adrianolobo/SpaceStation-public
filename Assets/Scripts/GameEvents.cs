@@ -22,32 +22,15 @@ public class GameEvents : MonoBehaviour
         onNewModuleCreated?.Invoke();
     }
 
-    public event Action onCreateNewModule;
-    public void createNewModule()
-    {
-        onCreateNewModule?.Invoke();
-    }
-
     public event Action onStartSpawnSequence;
     public void startSpawnSequence()
     {
         onStartSpawnSequence?.Invoke();
     }
 
-    public event Action onEndSpawnSequence;
-    public void endSpawnSequence()
-    {
-        onEndSpawnSequence?.Invoke();
-    }
-
     public event Action<int> onCargosDelivered;
     public void cargosDelivered(int amountCargosDelivered)
     {
         onCargosDelivered?.Invoke(amountCargosDelivered);
-    }
-    public event Action onPlayBtnClicked;
-    public void playBtnClicked()
-    {
-        onPlayBtnClicked?.Invoke();
     }
 }

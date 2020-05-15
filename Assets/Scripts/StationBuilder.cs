@@ -9,13 +9,11 @@ public class StationBuilder : MonoBehaviour
     void Start()
     {
         GameEvents.current.onModulePlaced += placeModule;
-        GameEvents.current.onCreateNewModule += createNewModule;
     }
 
     private void OnDestroy()
     {
         GameEvents.current.onModulePlaced -= placeModule;
-        GameEvents.current.onCreateNewModule -= createNewModule;
     }
     void createNewModule()
     {

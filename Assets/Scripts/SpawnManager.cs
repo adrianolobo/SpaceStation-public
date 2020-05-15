@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SpawnManager : MonoBehaviour
+public class SpawnManager : Singleton<SpawnManager>
 {
     public SpaceCarrier spaceCarrier;
 
@@ -15,30 +15,15 @@ public class SpawnManager : MonoBehaviour
     void Awake()
     {
         resetSpawnOrder();
-        GameEvents.current.onStartSpawnSequence += startSpawnSequence;
         spaceCarrierManager = GetComponent<SpaceCarrierManager>();
-
-        GameEvents.current.onCreateNewModule += pauseSpawn;
-        GameEvents.current.onNewModuleCreated += resumeSpawn;
     }
 
-    private void OnDestroy()
-    {
-        GameEvents.current.onStartSpawnSequence -= startSpawnSequence;
-        GameEvents.current.onCreateNewModule -= pauseSpawn;
-        GameEvents.current.onNewModuleCreated -= resumeSpawn;
-    }
-    private void pauseSpawn()
+    public void stop()
     {
         StopCoroutine(spawnCoroutine);
     }
 
-    private void resumeSpawn()
-    {
-        spawnCoroutine = StartCoroutine(spawnSequence());
-    }
-
-    private void startSpawnSequence()
+    public void startSpawnSequence()
     {
         createCarrier();
         spawnCoroutine = StartCoroutine(spawnSequence());
@@ -49,18 +34,22 @@ public class SpawnManager : MonoBehaviour
         // 25% and 25% for 1 and 2 cargos;
         // if less than 3, the amount that is left is added
         float cargoChance = Random.Range(0, 100);
+        SpaceStation spaceStation = SpaceStations.Instance.getSelected();
+        float cargoPercentage1 = spaceStation.cargoPercentage1;
+        float cargoPercentage2 = spaceStation.cargoPercentage2;
 
-        if (cargoChance < 50) return 2;
-        else if (cargoChance < 75) return 1;
+        if (cargoChance < cargoPercentage1) return 1;
+        else if (cargoChance < (cargoPercentage1 + cargoPercentage2)) return 2;
         return 3;
     }
 
     IEnumerator spawnSequence()
     {
+        float[] spawnChanges = SpaceStations.Instance.getSelected().spawnChances;
         // TODO: CREATE A STOP FLAG
         while (true)
         {
-            yield return new WaitForSeconds(Random.Range(7, 14));
+            yield return new WaitForSeconds(Random.Range(spawnChanges[0], spawnChanges[1]));
             createCarrier();
         }
     }

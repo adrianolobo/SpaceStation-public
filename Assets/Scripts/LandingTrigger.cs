@@ -13,6 +13,7 @@ public class LandingTrigger : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         SpaceCarrier spaceCarrier = collision.gameObject.GetComponent<SpaceCarrier>();
+        if (!spaceCarrier) return;
         Vector3 landingCorrectionPosition = transform.position;
         landingCorrectionPosition.z = 0;
         stationLanding.landCarrier(spaceCarrier, landingCorrectionPosition);

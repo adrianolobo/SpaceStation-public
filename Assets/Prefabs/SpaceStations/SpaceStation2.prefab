@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1175769445638325141}
+  - component: {fileID: 584742728387634703}
   m_Layer: 0
   m_Name: SpaceStation2
   m_TagString: Untagged
@@ -37,6 +38,23 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &584742728387634703
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5292868890380678786}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4d73a256258daa247b7cb1c81a746a76, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spawnChances:
+  - 2
+  - 4
+  cargoPercentage1: 10
+  cargoPercentage2: 0
 --- !u!1001 &518571157574967905
 PrefabInstance:
   m_ObjectHideFlags: 0

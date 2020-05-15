@@ -541,10 +541,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spaceStationsPrefabs:
-  - {fileID: 4991726832440098684, guid: c9f4baf5ca6093542a603fa163e63773, type: 3}
-  - {fileID: 5292868890380678786, guid: 821c0d0754423444a85cd283aa98a048, type: 3}
-  - {fileID: 4991726832440098684, guid: c9f4baf5ca6093542a603fa163e63773, type: 3}
-  - {fileID: 5292868890380678786, guid: 821c0d0754423444a85cd283aa98a048, type: 3}
+  - {fileID: -5861988414611600359, guid: c9f4baf5ca6093542a603fa163e63773, type: 3}
+  - {fileID: 584742728387634703, guid: 821c0d0754423444a85cd283aa98a048, type: 3}
 --- !u!1 &1736140512
 GameObject:
   m_ObjectHideFlags: 0

@@ -10,7 +10,6 @@ public class StationLanding : AbstractStationModule
 
     private void Start()
     {
-        GameEvents.current.onCreateNewModule += stopDelivery;
         GameEvents.current.onNewModuleCreated += startDelivery;
     }
 

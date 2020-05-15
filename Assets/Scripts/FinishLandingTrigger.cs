@@ -11,6 +11,7 @@ public class FinishLandingTrigger : MonoBehaviour
     }
     private void OnTriggerExit2D(Collider2D collision)
     {
+        // TODO: Verify if is necessary to check if the collision is of the landed carrier
         stationLanding.finishLanding();
     }
 }
