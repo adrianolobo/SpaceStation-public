@@ -18,6 +18,11 @@ public class SpaceCarrierOffscreen : MonoBehaviour
         createIndicator();
     }
 
+    public void destroyIndicator()
+    {
+        Destroy(offscreenIndicator.gameObject);
+    }
+
     private void createIndicator()
     {
         if (!spaceCarrier.isVisible && offscreenIndicator == null)
@@ -28,7 +33,7 @@ public class SpaceCarrierOffscreen : MonoBehaviour
         }
         if (spaceCarrier.isVisible && offscreenIndicator != null)
         {
-            Destroy(offscreenIndicator.gameObject);
+            destroyIndicator();
             offscreenIndicator = null;
         }
     }

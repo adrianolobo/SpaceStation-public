@@ -12,11 +12,19 @@ public class GameController : Singleton<GameController>
         gameState = STATE.START;
     }
 
-    public void gameOver()
+    public async void gameOver()
     {
         if (isGameOver) return;
         gameState = STATE.GAME_OVER;
+        SpawnManager.Instance.stop();
+        await UI.Instance.showGameOver();
+
         SpaceCarrierManager.Instance.destroyAll();
+        SpaceStations.Instance.destroyStations();
+        SpaceStations.Instance.createSpaceStations();
+        UI.Instance.startScreenAppear();
+
+        await UI.Instance.hideGameOver();
     }
 
     public void play()

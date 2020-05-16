@@ -14,10 +14,9 @@ public class SpaceStations : Singleton<SpaceStations>
     {
         screenSize = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, 0));
         createSpaceStations();
-        selectedStation = spaceStations[0];
     }
 
-    private void createSpaceStations()
+    public void createSpaceStations()
     {
         for (int i = 0; i < spaceStationsPrefabs.Length; i++)
         {
@@ -28,6 +27,18 @@ public class SpaceStations : Singleton<SpaceStations>
             spaceStation.transform.localPosition = new Vector3(stationPosX, 0, 0);
             spaceStations.Add(spaceStation);
         }
+        selectedStation = spaceStations[0];
+        moveToSelectedNoAnimation();
+    }
+
+    public void destroyStations()
+    {
+        selectedStation = null;
+        for (int i = 0; i < spaceStations.Count; i++)
+        {
+            Destroy(spaceStations[i].gameObject);
+        }
+        spaceStations = new List<SpaceStation>();
     }
 
     public void next()
@@ -50,6 +61,11 @@ public class SpaceStations : Singleton<SpaceStations>
     {
         transform.DOMoveX(-selectedIndex * screenSize.x * 2, 0.8f)
         .SetEase(Ease.InOutQuint);
+    }
+
+    private void moveToSelectedNoAnimation()
+    {
+        transform.position = new Vector3(-selectedIndex * screenSize.x * 2, 0, 0);
     }
     
     public SpaceStation getSelected()

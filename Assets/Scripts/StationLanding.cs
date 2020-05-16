@@ -45,6 +45,7 @@ public class StationLanding : AbstractStationModule
         while(hasContainer)
         {
             yield return new WaitForSeconds(1f);
+            if (!carrierLanding) break;
             hasContainer = carrierLanding.removeContainer();
 
             if (carrierLanding.getAmountOfContainers() > 0)
@@ -52,6 +53,7 @@ public class StationLanding : AbstractStationModule
                 GameEvents.current.cargosDelivered(1);
             }
         }
+        if (!carrierLanding) yield return null;
         carrierLanding.startMove();
         deliverContainerCoroutine = null;
         // The last one must be executed here because if its the last it will stop the movement of StartMove();

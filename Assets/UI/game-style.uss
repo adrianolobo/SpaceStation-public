@@ -16,6 +16,9 @@
 }
 
 .screen {
+    position: relative;
+    left: 0;
+    top: 0;
     flex-grow: 1;
     width: 100%;
     height: 100%;
@@ -71,15 +74,31 @@
     border-top-width: 0px;
 }
 
-.start-screen {
+.start-screen, .game-over-screen {
+    display: flex;
     flex-grow: 1;
     width: 100%;
     height: 100%;
-    position: relative;
+    position: absolute;
+    left: 0;
+    top: 0;
     align-items: center;
     justify-content: center;
 }
 
-.start-screen_disabled {
-    display: none;
+.game-over-label {
+    color: #c6e3ed;
+    font-size: 30px;
+    -unity-text-align: middle-center;
+}
+
+.black-overlay {
+    display: flex;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    flex: 1;
+    left: 0;
+    top: 0;
+    background-color: #000;
 }

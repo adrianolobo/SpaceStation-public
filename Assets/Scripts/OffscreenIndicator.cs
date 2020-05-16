@@ -22,7 +22,10 @@ public class OffscreenIndicator : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!spaceCarrier) return;
+        if (!spaceCarrier) {
+            Destroy(gameObject);
+            return;
+        };
         string direction = getSpaceScarrierDirection();
         followCarrier(direction);
     }

@@ -41,6 +41,11 @@ public class SpaceCarrier : MonoBehaviour
         GameController.Instance.gameOver();
     }
 
+    public void destroyCarrier()
+    {
+        Destroy(gameObject);
+    }
+
     private void OnDestroy()
     {
         GameEvents.current.onNewModuleCreated -= resumeMoving;
