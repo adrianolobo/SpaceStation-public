@@ -86,6 +86,10 @@
     justify-content: center;
 }
 
+.game-over-screen {
+    display: none;
+}
+
 .game-over-label {
     color: #c6e3ed;
     font-size: 30px;
