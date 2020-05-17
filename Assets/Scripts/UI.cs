@@ -18,14 +18,16 @@ public class UI : Singleton<UI>
     private VisualElement startScreen;
     private bool isStartScreenAnimating = false;
 
-    private void Awake()
+    private void OnEnable()
     {
         ui = GetComponent<PanelRenderer>();
         ui.postUxmlReload = BindUI;
+        Debug.Log("zxvzcx");
     }
 
     private IEnumerable<Object> BindUI()
     {
+        Debug.Log("aweaeww");
         var root = ui.visualTree;
         startScreen = root.Q<VisualElement>("start-screen");
         playBtn = root.Q<Button>("play-btn");
