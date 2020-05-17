@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 public class UI : Singleton<UI>
 {
-    private PanelRenderer ui;
+    public PanelRenderer ui;
     private Button playBtn;
     private Button nextBtn;
     private Button prevBtn;
@@ -18,16 +18,8 @@ public class UI : Singleton<UI>
     private VisualElement startScreen;
     private bool isStartScreenAnimating = false;
 
-    private void OnEnable()
+    private void Start()
     {
-        ui = GetComponent<PanelRenderer>();
-        ui.postUxmlReload = BindUI;
-        Debug.Log("zxvzcx");
-    }
-
-    private IEnumerable<Object> BindUI()
-    {
-        Debug.Log("aweaeww");
         var root = ui.visualTree;
         startScreen = root.Q<VisualElement>("start-screen");
         playBtn = root.Q<Button>("play-btn");
@@ -54,7 +46,7 @@ public class UI : Singleton<UI>
         {
             SpaceStations.Instance.prev();
         };
-        return null;
+        return;
     }
 
     private void startScreenDisapear()
