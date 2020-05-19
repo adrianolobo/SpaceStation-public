@@ -9,13 +9,13 @@ public class PathLine : MonoBehaviour
     private SpaceCarrier spaceCarrier;
 
     bool isCreatingPath = false;
-    Vector3 lastMousePosition;
+    Vector3 lastTouchPosition;
 
     public float minimalLineChunck = 0.02f;
     public float distanceToRemoveChunck = 0.08f;
     void Start()
     {
-        lastMousePosition = getMousePosition();
+        lastTouchPosition = new Vector3(0, 0, 0);
         pathLine = GetComponent<LineRenderer>();
         pathLine.positionCount = 0;
         spaceCarrier = GetComponent<SpaceCarrier>();
@@ -25,12 +25,16 @@ public class PathLine : MonoBehaviour
     {
         if (Input.GetMouseButtonUp(0))
         {
-            isCreatingPath = false;
-            return;
+            touchEnded();
         }
     }
 
     private void OnMouseDown()
+    {
+        touchBegan(getMousePosition());
+    }
+
+    public void touchBegan(Vector3 touchPosition)
     {
         if (spaceCarrier.isInDeliveryProcess)
         {
@@ -39,17 +43,22 @@ public class PathLine : MonoBehaviour
         };
         isCreatingPath = true;
         pathLine.positionCount = 1;
-        pathLine.SetPosition(0, getMousePosition());
+        pathLine.SetPosition(0, touchPosition);
     }
 
-    private bool hasMouseMoved()
+    public void touchEnded()
     {
-        if (getMousePosition() == lastMousePosition) return false;
-        lastMousePosition = getMousePosition();
+        isCreatingPath = false;
+    }
+
+    private bool hasTouchMoved(Vector3 touchPosition)
+    {
+        if (touchPosition == lastTouchPosition) return false;
+        lastTouchPosition = touchPosition;
         return true;
     }
 
-    public void drawLine()
+    public void drawLine(Vector3 touchPosition)
     {
         if (!spaceCarrier)
         {
@@ -58,15 +67,15 @@ public class PathLine : MonoBehaviour
         }
         if (spaceCarrier.isInDeliveryProcess) return;
         if (!isCreatingPath) return;
-        if (!hasMouseMoved()) return;
-        float distanceToMouse = calculateDistanceToMouse();
-        if (distanceToMouse < minimalLineChunck) return;
-        createLineChunks(getMousePosition());
+        if (!hasTouchMoved(touchPosition)) return;
+        float distanceToTouch = calculateDistanceToTouch(touchPosition);
+        if (distanceToTouch < minimalLineChunck) return;
+        createLineChunks(touchPosition);
     }
 
     private void createLineChunks(Vector3 targetPosition)
     {
-        Vector3 lastLinePoint = getMouseOrCarrierPosition();
+        Vector3 lastLinePoint = getLastOrCarrierPosition();
         float distanceToTarget = Vector3.Distance(lastLinePoint, targetPosition);
         int amountChuncksToAdd = Mathf.FloorToInt(distanceToTarget / minimalLineChunck);
         Vector3 direction = targetPosition - lastLinePoint;
@@ -89,7 +98,7 @@ public class PathLine : MonoBehaviour
         pathLine.SetPosition(newIndex, newPoint);
     }
 
-    private Vector3 getMouseOrCarrierPosition()
+    private Vector3 getLastOrCarrierPosition()
     {
         if (pathLine.positionCount > 0)
         {
@@ -98,11 +107,10 @@ public class PathLine : MonoBehaviour
         return spaceCarrier.currentPosition;
     }
 
-    float calculateDistanceToMouse()
+    float calculateDistanceToTouch(Vector3 touchPosition)
     {
-        Vector3 lastPosition = getMouseOrCarrierPosition();
-        Vector3 mousePosition = getMousePosition();
-        return Vector3.Distance(lastPosition, mousePosition);
+        Vector3 lastPosition = getLastOrCarrierPosition();
+        return Vector3.Distance(lastPosition, touchPosition);
     }
 
     private Vector3 getMousePosition()

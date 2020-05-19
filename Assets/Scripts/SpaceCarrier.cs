@@ -60,7 +60,6 @@ public class SpaceCarrier : MonoBehaviour
 
     void Update()
     {
-        pathLine.drawLine();
         setAngle();
         move();
         pathLine.updateLine();
