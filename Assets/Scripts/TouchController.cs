@@ -34,6 +34,7 @@ public class TouchController : MonoBehaviour
 
         TouchCarrier touchCarrier = getTouchCarrierByFingerId(touch.fingerId);
         if (touchCarrier == null) return;
+        touchCarrier.touch = touch;
         touchCarrier.pathLine.drawLine(getTouchWorldPosition(touchCarrier));
     }
 
@@ -53,14 +54,14 @@ public class TouchController : MonoBehaviour
         for (int i = 0; i < hits.Length; i++)
         {
             GameObject colliderGO = hits[i].collider.gameObject;
-            if (colliderGO.tag == "SpaceCarrier")
+            if (colliderGO.tag == "TouchRadar")
             {
                 spaceCarrierGO = colliderGO;
                 break;
             }
         }
         if (spaceCarrierGO == null) return;
-        PathLine pathLine = spaceCarrierGO.GetComponent<PathLine>();
+        PathLine pathLine = spaceCarrierGO.GetComponentInParent<PathLine>();
         TouchCarrier touchCarrier = new TouchCarrier(touch.fingerId, touch, pathLine);
         touches.Add(touchCarrier);
         touchCarrier.pathLine.touchBegan(getTouchWorldPosition(touchCarrier));
@@ -72,12 +73,6 @@ public class TouchController : MonoBehaviour
         Vector3 touchPosition = Camera.main.ScreenToWorldPoint(touch.position);
         touchPosition.z = 0;
         return touchPosition;
-    }
-
-
-    private bool checkIdExists(int fingerId)
-    {
-        return touches.Exists((touch) => touch.fingerId == fingerId);
     }
 
     private TouchCarrier getTouchCarrierByFingerId(int fingerId)
