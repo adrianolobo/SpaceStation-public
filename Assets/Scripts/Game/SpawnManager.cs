@@ -34,7 +34,7 @@ public class SpawnManager : Singleton<SpawnManager>
         // 25% and 25% for 1 and 2 cargos;
         // if less than 3, the amount that is left is added
         float cargoChance = Random.Range(0, 100);
-        SpaceStation spaceStation = SpaceStations.Instance.getSelected();
+        SpaceStation spaceStation = SpaceStation.Instance;
         float cargoPercentage1 = spaceStation.cargoPercentage1;
         float cargoPercentage2 = spaceStation.cargoPercentage2;
 
@@ -45,7 +45,7 @@ public class SpawnManager : Singleton<SpawnManager>
 
     IEnumerator spawnSequence()
     {
-        float[] spawnChanges = SpaceStations.Instance.getSelected().spawnChances;
+        float[] spawnChanges = SpaceStation.Instance.spawnChances;
         // TODO: CREATE A STOP FLAG
         while (true)
         {

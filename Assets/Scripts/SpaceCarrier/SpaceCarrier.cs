@@ -32,8 +32,6 @@ public class SpaceCarrier : MonoBehaviour
         rigidBody = GetComponent<Rigidbody2D>();
         rigidBody.velocity = new Vector2(0, 0);
         turnToCenter();
-
-        GameEvents.current.onNewModuleCreated += resumeMoving;
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -44,11 +42,6 @@ public class SpaceCarrier : MonoBehaviour
     public void destroyCarrier()
     {
         Destroy(gameObject);
-    }
-
-    private void OnDestroy()
-    {
-        GameEvents.current.onNewModuleCreated -= resumeMoving;
     }
 
     public void createContainers(int amountContainersToCreate)

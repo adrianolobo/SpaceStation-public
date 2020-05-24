@@ -10,18 +10,6 @@ public class GameEvents : MonoBehaviour
         current = this;
     }
 
-    public event Action<AbstractStationModule> onModulePlaced;
-    public void modulePlaced(AbstractStationModule module)
-    {
-        onModulePlaced?.Invoke(module);
-    }
-
-    public event Action onNewModuleCreated;
-    public void newModuleCreated()
-    {
-        onNewModuleCreated?.Invoke();
-    }
-
     public event Action onStartSpawnSequence;
     public void startSpawnSequence()
     {

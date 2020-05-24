@@ -23,11 +23,6 @@ public class SceneLoader : Singleton<SceneLoader>
         {
             goToGame();
         }
-
-        if (Input.GetMouseButtonDown(1))
-        {
-            goToMenu();
-        }
     }
 
     public async void goToGame()

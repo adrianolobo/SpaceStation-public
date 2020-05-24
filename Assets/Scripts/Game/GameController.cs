@@ -9,23 +9,18 @@ public class GameController : Singleton<GameController>
     STATE gameState;
     private void Start()
     {
-        Input.simulateMouseWithTouches = false;
         gameState = STATE.START;
+        play();
     }
 
-    public async void gameOver()
+    public void gameOver()
     {
         if (isGameOver) return;
         gameState = STATE.GAME_OVER;
         SpawnManager.Instance.stop();
-        await UI.Instance.showGameOver();
 
         SpaceCarrierManager.Instance.destroyAll();
-        SpaceStations.Instance.destroyStations();
-        SpaceStations.Instance.createSpaceStations();
-        UI.Instance.startScreenAppear();
-
-        await UI.Instance.hideGameOver();
+        SceneLoader.Instance.goToMenu();
     }
 
     public void play()

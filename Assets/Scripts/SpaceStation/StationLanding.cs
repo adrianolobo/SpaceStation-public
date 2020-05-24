@@ -2,22 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class StationLanding : AbstractStationModule
+public class StationLanding : MonoBehaviour
 {
     private SpaceCarrier carrierLanding;
 
-    private Coroutine deliverContainerCoroutine = null;
-
-    private void Start()
-    {
-        GameEvents.current.onNewModuleCreated += startDelivery;
-    }
-
-    private void stopDelivery()
-    {
-        if (deliverContainerCoroutine == null) return;
-        StopCoroutine(deliverContainerCoroutine);
-    }
 
     public void landCarrier(SpaceCarrier carrier, Vector3 landingCorrectionPosition)
     {
@@ -30,7 +18,7 @@ public class StationLanding : AbstractStationModule
 
     public void startDelivery()
     {
-        deliverContainerCoroutine = StartCoroutine(deliverContainer());
+        StartCoroutine(deliverContainer());
     }
 
     public void finishLanding()
@@ -55,7 +43,6 @@ public class StationLanding : AbstractStationModule
         }
         if (!carrierLanding) yield return null;
         carrierLanding.startMove();
-        deliverContainerCoroutine = null;
         // The last one must be executed here because if its the last it will stop the movement of StartMove();
         GameEvents.current.cargosDelivered(1);
     }
