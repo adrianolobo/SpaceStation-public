@@ -9,6 +9,7 @@ public class GameController : Singleton<GameController>
     STATE gameState;
     private void Start()
     {
+        Input.simulateMouseWithTouches = false;
         gameState = STATE.START;
     }
 
