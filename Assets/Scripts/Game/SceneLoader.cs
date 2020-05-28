@@ -17,13 +17,6 @@ public class SceneLoader : Singleton<SceneLoader>
     {
         await sceneAppear();
     }
-    void Update()
-    {
-        if (Input.GetMouseButtonDown(0))
-        {
-            goToGame();
-        }
-    }
 
     public async void goToGame()
     {
@@ -40,16 +33,27 @@ public class SceneLoader : Singleton<SceneLoader>
     private async Task sceneDisappear()
     {
         canvasGroup.alpha = 0;
+        canvasGroup.interactable = false;
         await DOTween.To(() => 0f, (alpha) => canvasGroup.alpha = alpha, 1f, 0.8f)
             .SetEase(Ease.OutQuad)
+            .OnComplete(() =>
+            {
+                canvasGroup.interactable = true;
+            })
             .AsyncWaitForCompletion();
         return;
     }
     private async Task sceneAppear()
     {
+        canvasGroup.interactable = true;
         canvasGroup.alpha = 1;
         await DOTween.To(() => 1f, (alpha) => canvasGroup.alpha = alpha, 0f, 0.8f)
             .SetEase(Ease.OutQuad)
+            .OnComplete(() =>
+            {
+                canvasGroup.interactable = false;
+                Debug.Log(canvasGroup.interactable);
+            })
             .AsyncWaitForCompletion();
         return;
     }
