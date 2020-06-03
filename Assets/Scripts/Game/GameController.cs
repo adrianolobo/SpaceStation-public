@@ -6,6 +6,7 @@ using UnityEngine;
 public class GameController : Singleton<GameController>
 {
     private enum STATE { START, PLAYING, GAME_OVER };
+    public List<SpaceStation> spaceStations = new List<SpaceStation>();
     STATE gameState;
     private void Start()
     {
@@ -26,9 +27,23 @@ public class GameController : Singleton<GameController>
     public void play()
     {
         if (isPlaying) return;
+        instantiateStation();
         gameState = STATE.PLAYING;
         SpawnManager.Instance.startSpawnSequence();
         GameEvents.current.startSpawnSequence();
+    }
+
+    public void deliverCargo(int cargoAmount)
+    {
+        int totalCargos = PlayerPrefs.GetInt("total-cargos");
+        PlayerPrefs.SetInt("total-cargos", totalCargos++);
+    }
+
+    private void instantiateStation()
+    {
+        string stationName = SceneLoader.Instance.getStationNameToLoad();
+        SpaceStation spaceStation = spaceStations.Find((spaceStationItem) => spaceStationItem.name == stationName);
+        Instantiate(spaceStation);
     }
 
     public bool isPlaying { get { return gameState == STATE.PLAYING; } }

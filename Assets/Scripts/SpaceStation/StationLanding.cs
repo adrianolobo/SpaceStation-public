@@ -38,12 +38,12 @@ public class StationLanding : MonoBehaviour
 
             if (carrierLanding.getAmountOfContainers() > 0)
             {
-                GameEvents.current.cargosDelivered(1);
+                GameController.Instance.deliverCargo(1);
             }
         }
         if (!carrierLanding) yield return null;
         carrierLanding.startMove();
         // The last one must be executed here because if its the last it will stop the movement of StartMove();
-        GameEvents.current.cargosDelivered(1);
+        GameController.Instance.deliverCargo(1);
     }
 }

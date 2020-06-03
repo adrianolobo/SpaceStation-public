@@ -8,6 +8,8 @@ using System.Threading.Tasks;
 public class SceneLoader : Singleton<SceneLoader>
 {
     CanvasGroup canvasGroup;
+
+    static string stationNameToLoad;
     
     void Awake() {
         canvasGroup = GetComponentInChildren<CanvasGroup>();
@@ -18,8 +20,15 @@ public class SceneLoader : Singleton<SceneLoader>
         await sceneAppear();
     }
 
-    public async void goToGame()
+    public string getStationNameToLoad()
     {
+        if (stationNameToLoad == null) return "Station1";
+        return stationNameToLoad;
+    }
+
+    public async void goToGame(string stationName)
+    {
+        stationNameToLoad = stationName;
         await sceneDisappear();
         SceneManager.LoadScene("GameScene");
     }
@@ -52,7 +61,6 @@ public class SceneLoader : Singleton<SceneLoader>
             .OnComplete(() =>
             {
                 canvasGroup.interactable = false;
-                Debug.Log(canvasGroup.interactable);
             })
             .AsyncWaitForCompletion();
         return;

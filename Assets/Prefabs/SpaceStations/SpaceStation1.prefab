@@ -56,7 +56,7 @@ MonoBehaviour:
   cargoPercentage1: 80
   cargoPercentage2: 20
   stationName: International Space Station
-  stationImage: {fileID: 21300000, guid: 3b157f25017dd794b9016421af475c74, type: 3}
+  stationImage: {fileID: 21300000, guid: 848f105d6ffa5bc4cac15de3ffa5d084, type: 3}
 --- !u!1001 &1998819393543954127
 PrefabInstance:
   m_ObjectHideFlags: 0

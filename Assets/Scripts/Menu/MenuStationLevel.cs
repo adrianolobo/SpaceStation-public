@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.UI;
 
 public class MenuStationLevel : MonoBehaviour
 {
@@ -12,5 +13,8 @@ public class MenuStationLevel : MonoBehaviour
         TextMeshProUGUI title = GetComponentInChildren<TextMeshProUGUI>();
         title.SetText(spaceStation.stationName);
 
+        GameObject stationImageObj = transform.Find("StationImage").gameObject;
+        Image stationImage = stationImageObj.GetComponent<Image>();
+        stationImage.sprite = spaceStation.stationImage;
     }
 }
