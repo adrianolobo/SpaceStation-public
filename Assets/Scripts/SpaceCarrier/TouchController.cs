@@ -21,6 +21,7 @@ public class TouchController : MonoBehaviour
 
     private void touchHandler(Touch touch)
     {
+        return;
         if (touch.phase == TouchPhase.Ended || touch.phase == TouchPhase.Canceled)
         {
             touchEndHandler(touch);

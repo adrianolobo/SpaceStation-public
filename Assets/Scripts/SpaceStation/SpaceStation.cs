@@ -9,4 +9,5 @@ public class SpaceStation : Singleton<SpaceStation>
     public float cargoPercentage2;
     public string stationName;
     public Sprite stationImage;
+    public int cargosToUnlock = 0;
 }

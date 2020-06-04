@@ -16,5 +16,14 @@ public class MenuStationLevel : MonoBehaviour
         GameObject stationImageObj = transform.Find("StationImage").gameObject;
         Image stationImage = stationImageObj.GetComponent<Image>();
         stationImage.sprite = spaceStation.stationImage;
+
+        manageCargosToUnlock();
+    }
+
+    private void manageCargosToUnlock()
+    {
+        if (Storage.Instance.getTotalCargos() <= spaceStation.cargosToUnlock) return;
+        GameObject toUnlockContainer = transform.Find("CargosToUnlock").gameObject;
+        toUnlockContainer.SetActive(false);
     }
 }

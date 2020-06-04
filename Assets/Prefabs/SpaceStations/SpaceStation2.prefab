@@ -57,6 +57,7 @@ MonoBehaviour:
   cargoPercentage2: 0
   stationName: Andromeda
   stationImage: {fileID: 21300000, guid: 21e652415c33121498ac63fbcb8f469d, type: 3}
+  cargosToUnlock: 10
 --- !u!1001 &518571157574967905
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -23,17 +23,18 @@ public class PathLine : MonoBehaviour
 
     private void Update()
     {
-        /*
+        // JUST TO DEBUG!!!!!!!
+        drawLine(getMousePosition());
         if (Input.GetMouseButtonUp(0))
         {
             touchEnded();
         }
-        */
     }
 
     private void OnMouseDown()
-    {
-       // touchBegan(getMousePosition());
+    {  
+       // JUST TO DEBUG!!!!!!!
+       touchBegan(getMousePosition());
     }
 
     public void touchBegan(Vector3 touchPosition)

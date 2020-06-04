@@ -35,8 +35,8 @@ public class GameController : Singleton<GameController>
 
     public void deliverCargo(int cargoAmount)
     {
-        int totalCargos = PlayerPrefs.GetInt("total-cargos");
-        PlayerPrefs.SetInt("total-cargos", totalCargos++);
+        int totalCargos = Storage.Instance.getTotalCargos();
+        Storage.Instance.setTotalCargos(totalCargos + cargoAmount);
     }
 
     private void instantiateStation()
