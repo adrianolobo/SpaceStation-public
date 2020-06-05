@@ -13,17 +13,36 @@ public class MenuStationLevel : MonoBehaviour
         TextMeshProUGUI title = GetComponentInChildren<TextMeshProUGUI>();
         title.SetText(spaceStation.stationName);
 
+        manageStationSprite();
+        manageCargosToUnlock();
+    }
+
+    private void manageStationSprite()
+    {
         GameObject stationImageObj = transform.Find("StationImage").gameObject;
         Image stationImage = stationImageObj.GetComponent<Image>();
         stationImage.sprite = spaceStation.stationImage;
-
-        manageCargosToUnlock();
+        if (isLocked)
+        {
+            stationImage.color = new Color(0.1f, 0.1f, 0.1f); ;
+            return;
+        }
+        GameObject lockImg = transform.Find("Lock").gameObject;
+        lockImg.SetActive(false);
     }
 
     private void manageCargosToUnlock()
     {
-        if (Storage.Instance.getTotalCargos() <= spaceStation.cargosToUnlock) return;
+        if (isLocked) return;
         GameObject toUnlockContainer = transform.Find("CargosToUnlock").gameObject;
         toUnlockContainer.SetActive(false);
+    }
+
+    private bool isLocked
+    {
+        get
+        {
+            return Storage.Instance.getTotalCargos() <= spaceStation.cargosToUnlock;
+        }
     }
 }
