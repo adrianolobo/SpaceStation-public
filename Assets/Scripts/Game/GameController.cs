@@ -7,9 +7,14 @@ public class GameController : Singleton<GameController>
 {
     private enum STATE { START, PLAYING, GAME_OVER };
     public List<SpaceStation> spaceStations = new List<SpaceStation>();
+    public SpaceStation defaultSpaceStation;
+    private SpaceStation spaceStation;
+    private int currentScore = 0;
+    private GameCargoCount gameCargoCount;
     STATE gameState;
     private void Start()
     {
+        gameCargoCount = GameObject.Find("GameCargoCount").GetComponent<GameCargoCount>();
         gameState = STATE.START;
         play();
     }
@@ -37,12 +42,20 @@ public class GameController : Singleton<GameController>
     {
         int totalCargos = Storage.Instance.getTotalCargos();
         Storage.Instance.setTotalCargos(totalCargos + cargoAmount);
+        currentScore += 1;
+        gameCargoCount.setCount(currentScore.ToString());
+        Storage.Instance.setHighScore(currentScore, spaceStation.name);
     }
 
     private void instantiateStation()
     {
         string stationName = SceneLoader.Instance.getStationNameToLoad();
-        SpaceStation spaceStation = spaceStations.Find((spaceStationItem) => spaceStationItem.name == stationName);
+
+        spaceStation = spaceStations.Find((spaceStationItem) => spaceStationItem.name == stationName);
+        if (spaceStation == null)
+        {
+            spaceStation = defaultSpaceStation;
+        }
         Instantiate(spaceStation);
     }
 

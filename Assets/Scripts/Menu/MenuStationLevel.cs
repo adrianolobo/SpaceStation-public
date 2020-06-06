@@ -14,7 +14,7 @@ public class MenuStationLevel : MonoBehaviour
         title.SetText(spaceStation.stationName);
 
         manageStationSprite();
-        manageCargosToUnlock();
+        manageLockedDetails();
     }
 
     private void manageStationSprite()
@@ -31,9 +31,13 @@ public class MenuStationLevel : MonoBehaviour
         lockImg.SetActive(false);
     }
 
-    private void manageCargosToUnlock()
+    private void manageLockedDetails()
     {
-        if (isLocked) return;
+        if (isLocked) {
+            GameObject highScoreContainer = transform.Find("HighScoreContainer").gameObject;
+            highScoreContainer.SetActive(false);
+            return;
+        };
         GameObject toUnlockContainer = transform.Find("CargosToUnlock").gameObject;
         toUnlockContainer.SetActive(false);
     }
