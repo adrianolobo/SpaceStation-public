@@ -130,9 +130,9 @@ public class SpaceCarrier : MonoBehaviour
         gameObject.layer = LayerMask.NameToLayer(deliveredLayer);
     }
 
-    public bool removeContainer()
+    public bool removeContainer(Container.CARGO_COLOR[] accepts)
     {
-        return containerManager.removeContainer();
+        return containerManager.removeContainer(accepts);
     }
 
     public bool getHasAlreadyEnteredScreen()
@@ -164,7 +164,12 @@ public class SpaceCarrier : MonoBehaviour
         {
             return LayerMask.LayerToName(gameObject.layer) == deliveredLayer;
         }
-    } 
+    }
+
+    public ContainerManager getContainerManager()
+    {
+        return GetComponentInChildren<ContainerManager>();
+    }
 
     public bool isInDeliveryProcess
     {

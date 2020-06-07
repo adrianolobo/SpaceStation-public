@@ -7,7 +7,7 @@ public class Container : MonoBehaviour
     public Sprite containerRed;
     public Sprite containerBlue;
     public enum CARGO_COLOR { BLUE, RED };
-    static CARGO_COLOR cargoColor = CARGO_COLOR.RED;
+    private CARGO_COLOR cargoColor = CARGO_COLOR.RED;
     void Awake()
     {
         setContainerRed();
@@ -44,5 +44,10 @@ public class Container : MonoBehaviour
     public bool isCargoBlue()
     {
         return cargoColor == CARGO_COLOR.BLUE;
+    }
+
+    public CARGO_COLOR getCargoColor()
+    {
+        return cargoColor;
     }
 }

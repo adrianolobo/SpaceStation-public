@@ -8,7 +8,6 @@ public class ContainerManager : MonoBehaviour
     private List<GameObject> containers = new List<GameObject>();
     public void createContainers(int amountToCreate)
     {
-        int redPercentage = SpaceStation.Instance.cargoRedPercentage;
         bool allContainersSameColor = SpaceStation.Instance.allContainersSameColor;
         Container.CARGO_COLOR initialCargoColor = getRandomCargoColor();
         List<Container.CARGO_COLOR> cargoColorsToCreate = new List<Container.CARGO_COLOR>();
@@ -21,6 +20,7 @@ public class ContainerManager : MonoBehaviour
             }
             cargoColorsToCreate.Add(getRandomCargoColor());
         }
+
 
         for (int i = 0; i < cargoColorsToCreate.Count; i++)
         {
@@ -54,13 +54,39 @@ public class ContainerManager : MonoBehaviour
         if (colorChance <= redPercentage) return Container.CARGO_COLOR.RED;
         return Container.CARGO_COLOR.BLUE;
     }
-    public bool removeContainer()
+    public bool removeContainer(Container.CARGO_COLOR[] accepts)
     {
-        if (containers.Count == 0) return false;
-        GameObject container = containers[containers.Count - 1];
-        containers.RemoveAt(containers.Count - 1);
-        Destroy(container);
+        List<Container.CARGO_COLOR> acceptsList = new List<Container.CARGO_COLOR>(accepts);
+        GameObject containerToRemove = containers.Find((containerObj) =>
+        {
+            Container container = containerObj.GetComponent<Container>();
+            return acceptsList.Exists((acceptColor) =>
+            {
+                return container.getCargoColor() == acceptColor;
+            });
+        });
+        if (containerToRemove == null) return false;
+        containers.Remove(containerToRemove);
+        Destroy(containerToRemove);
         return true;
+    }
+
+    public bool hasRedContainer()
+    {
+        GameObject redContainer = containers.Find((container) =>
+        {
+            return container.GetComponent<Container>().isCargoRed();
+        });
+        return redContainer != null;
+    }
+
+    public bool hasBlueContainer()
+    {
+        GameObject blueContainer = containers.Find((container) =>
+        {
+            return container.GetComponent<Container>().isCargoBlue();
+        });
+        return blueContainer != null;
     }
 
     public int getContainersCount()
