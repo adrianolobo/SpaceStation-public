@@ -57,6 +57,9 @@ MonoBehaviour:
   cargoPercentage2: 20
   stationName: International Space Station
   stationImage: {fileID: 21300000, guid: 848f105d6ffa5bc4cac15de3ffa5d084, type: 3}
+  cargosToUnlock: 0
+  cargoRedPercentage: 50
+  allContainersSameColor: 0
 --- !u!1001 &1998819393543954127
 PrefabInstance:
   m_ObjectHideFlags: 0

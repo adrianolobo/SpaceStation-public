@@ -10,4 +10,6 @@ public class SpaceStation : Singleton<SpaceStation>
     public string stationName;
     public Sprite stationImage;
     public int cargosToUnlock = 0;
+    public int cargoRedPercentage = 100;
+    public bool allContainersSameColor = true;
 }

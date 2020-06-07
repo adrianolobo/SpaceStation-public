@@ -8,17 +8,52 @@ public class ContainerManager : MonoBehaviour
     private List<GameObject> containers = new List<GameObject>();
     public void createContainers(int amountToCreate)
     {
-        for (int i = 0; i < amountToCreate; i ++)
+        int redPercentage = SpaceStation.Instance.cargoRedPercentage;
+        bool allContainersSameColor = SpaceStation.Instance.allContainersSameColor;
+        Container.CARGO_COLOR initialCargoColor = getRandomCargoColor();
+        List<Container.CARGO_COLOR> cargoColorsToCreate = new List<Container.CARGO_COLOR>();
+        for (int i = 0; i < amountToCreate; i++)
         {
-            GameObject container = Instantiate(containerPrefab, transform);
-            SpriteRenderer containerSprite = container.GetComponent<SpriteRenderer>();
-            float sizeX = containerSprite.sprite.rect.width / containerSprite.sprite.pixelsPerUnit;
-            float padding = 2 / containerSprite.sprite.pixelsPerUnit;
-            container.transform.localPosition = new Vector3((sizeX + padding) * i, 0, 0);
-            containers.Add(container);
+            if (allContainersSameColor)
+            {
+                cargoColorsToCreate.Add(initialCargoColor);
+                continue;
+            }
+            cargoColorsToCreate.Add(getRandomCargoColor());
+        }
+
+        for (int i = 0; i < cargoColorsToCreate.Count; i++)
+        {
+            Container.CARGO_COLOR cargoColor = cargoColorsToCreate[i];
+            GameObject containerObj = Instantiate(containerPrefab, transform);
+            Container containerSprite = containerObj.GetComponent<Container>();
+            float sizeX = containerSprite.getWitdh();
+            float padding = 2 / containerSprite.getPixelPerUnit();
+
+            setCargoType(cargoColor, containerSprite);
+
+            containerObj.transform.localPosition = new Vector3((sizeX + padding) * i, 0, 0);
+            containers.Add(containerObj);
         }
     }
 
+    public void setCargoType(Container.CARGO_COLOR cargoColor, Container containerSprite)
+    {
+        if (cargoColor == Container.CARGO_COLOR.RED)
+        {
+            containerSprite.setContainerRed();
+            return;
+        }
+        containerSprite.setContainerBlue();
+    }
+
+    private Container.CARGO_COLOR getRandomCargoColor()
+    {
+        float colorChance = Random.Range(0, 100);
+        int redPercentage = SpaceStation.Instance.cargoRedPercentage;
+        if (colorChance <= redPercentage) return Container.CARGO_COLOR.RED;
+        return Container.CARGO_COLOR.BLUE;
+    }
     public bool removeContainer()
     {
         if (containers.Count == 0) return false;
