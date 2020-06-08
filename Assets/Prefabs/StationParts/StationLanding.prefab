@@ -34,8 +34,6 @@ Transform:
   - {fileID: 8701871040659575167}
   - {fileID: 8701871040474325676}
   - {fileID: 8701871039697594723}
-  - {fileID: 8701871040245922854}
-  - {fileID: 6709787486222413596}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -128,6 +126,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   accepts: 0000000001000000
+  blueLight: {fileID: 420404185704965216, guid: 88ee449c19bca5648845a9254cab6004,
+    type: 3}
+  redLight: {fileID: 7721217241342512382, guid: 47a82fadc66308f4b87eb13a4aa293a9,
+    type: 3}
+  redBlueLight: {fileID: 2728818191820844111, guid: 7045cba780286bd45beabd3be230e8e3,
+    type: 3}
 --- !u!50 &1449952822
 Rigidbody2D:
   serializedVersion: 4
@@ -359,153 +363,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a553132837c71bd48823a34602f90222, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1001 &6709787486698541162
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 8701871039000581533}
-    m_Modifications:
-    - target: {fileID: 2728818191820844108, guid: 7045cba780286bd45beabd3be230e8e3,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2728818191820844108, guid: 7045cba780286bd45beabd3be230e8e3,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2728818191820844108, guid: 7045cba780286bd45beabd3be230e8e3,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2728818191820844108, guid: 7045cba780286bd45beabd3be230e8e3,
-        type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2728818191820844108, guid: 7045cba780286bd45beabd3be230e8e3,
-        type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2728818191820844108, guid: 7045cba780286bd45beabd3be230e8e3,
-        type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2728818191820844108, guid: 7045cba780286bd45beabd3be230e8e3,
-        type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2728818191820844108, guid: 7045cba780286bd45beabd3be230e8e3,
-        type: 3}
-      propertyPath: m_RootOrder
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 2728818191820844108, guid: 7045cba780286bd45beabd3be230e8e3,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2728818191820844108, guid: 7045cba780286bd45beabd3be230e8e3,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2728818191820844108, guid: 7045cba780286bd45beabd3be230e8e3,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2728818191820844111, guid: 7045cba780286bd45beabd3be230e8e3,
-        type: 3}
-      propertyPath: m_Name
-      value: LandingLights
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 7045cba780286bd45beabd3be230e8e3, type: 3}
---- !u!4 &8701871040245922854 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 2728818191820844108, guid: 7045cba780286bd45beabd3be230e8e3,
-    type: 3}
-  m_PrefabInstance: {fileID: 6709787486698541162}
-  m_PrefabAsset: {fileID: 0}
---- !u!1001 &8701871039904154448
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 8701871039000581533}
-    m_Modifications:
-    - target: {fileID: 2728818191820844108, guid: 7045cba780286bd45beabd3be230e8e3,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2728818191820844108, guid: 7045cba780286bd45beabd3be230e8e3,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2728818191820844108, guid: 7045cba780286bd45beabd3be230e8e3,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2728818191820844108, guid: 7045cba780286bd45beabd3be230e8e3,
-        type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2728818191820844108, guid: 7045cba780286bd45beabd3be230e8e3,
-        type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2728818191820844108, guid: 7045cba780286bd45beabd3be230e8e3,
-        type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2728818191820844108, guid: 7045cba780286bd45beabd3be230e8e3,
-        type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2728818191820844108, guid: 7045cba780286bd45beabd3be230e8e3,
-        type: 3}
-      propertyPath: m_RootOrder
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 2728818191820844108, guid: 7045cba780286bd45beabd3be230e8e3,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2728818191820844108, guid: 7045cba780286bd45beabd3be230e8e3,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 180
-      objectReference: {fileID: 0}
-    - target: {fileID: 2728818191820844108, guid: 7045cba780286bd45beabd3be230e8e3,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2728818191820844111, guid: 7045cba780286bd45beabd3be230e8e3,
-        type: 3}
-      propertyPath: m_Name
-      value: LandingLights (1)
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 7045cba780286bd45beabd3be230e8e3, type: 3}
---- !u!4 &6709787486222413596 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 2728818191820844108, guid: 7045cba780286bd45beabd3be230e8e3,
-    type: 3}
-  m_PrefabInstance: {fileID: 8701871039904154448}
-  m_PrefabAsset: {fileID: 0}

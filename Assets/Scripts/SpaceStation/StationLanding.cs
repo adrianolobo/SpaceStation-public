@@ -5,7 +5,31 @@ using UnityEngine;
 public class StationLanding : MonoBehaviour
 {
     private SpaceCarrier carrierLanding;
-    public Container.CARGO_COLOR[] accepts;
+    public Container.CARGO_COLOR[] accepts = new Container.CARGO_COLOR[2] ;
+    public GameObject blueLight;
+    public GameObject redLight;
+    public GameObject redBlueLight;
+
+    private void Awake()
+    {
+        createLights();
+    }
+
+    private void createLights()
+    {
+        GameObject landingLight = getCorrectLight();
+        Instantiate(landingLight, transform);
+        Instantiate(landingLight, transform).transform.localRotation = Quaternion.Euler(0, 0, 180);
+    }
+
+    private GameObject getCorrectLight()
+    {
+        if (accepts[0] != accepts[1]) return redBlueLight;
+        if (accepts[0] == Container.CARGO_COLOR.BLUE) return blueLight;
+        return redLight;
+
+    }
+
 
     public void landCarrier(SpaceCarrier carrier, Vector3 landingCorrectionPosition)
     {

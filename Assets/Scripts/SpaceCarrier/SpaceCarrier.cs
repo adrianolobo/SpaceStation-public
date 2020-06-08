@@ -20,6 +20,7 @@ public class SpaceCarrier : MonoBehaviour
 
     private string landingLayer = "SpaceCarrierLanding";
     private string deliveredLayer = "SpaceCarrierDelivered";
+    private string defaultLayer = "SpaceCarrier";
     void Awake()
     {
         containerManager = GetComponentInChildren<ContainerManager>();
@@ -127,6 +128,12 @@ public class SpaceCarrier : MonoBehaviour
 
     public void finishDeliveryProcess()
     {
+        if (containerManager.getContainersCount() > 0) {
+            gameObject.layer = LayerMask.NameToLayer(defaultLayer);
+            stationLanding = null;
+            isLanded = false;
+            return;
+        };
         gameObject.layer = LayerMask.NameToLayer(deliveredLayer);
     }
 
