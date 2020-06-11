@@ -35,7 +35,6 @@ public class GameController : Singleton<GameController>
         instantiateStation();
         gameState = STATE.PLAYING;
         SpawnManager.Instance.startSpawnSequence();
-        GameEvents.current.startSpawnSequence();
     }
 
     public void deliverCargo(int cargoAmount)
