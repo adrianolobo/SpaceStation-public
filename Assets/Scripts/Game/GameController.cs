@@ -11,12 +11,16 @@ public class GameController : Singleton<GameController>
     private SpaceStation spaceStation;
     private int currentScore = 0;
     private GameCargoCount gameCargoCount;
+    private bool isGamePaused = false;
     STATE gameState;
     private void Start()
     {
         gameCargoCount = GameObject.Find("GameCargoCount").GetComponent<GameCargoCount>();
         gameState = STATE.START;
         play();
+
+        GameEvents.Instance.onOpenConfigMenu += () => isGamePaused = true;
+        GameEvents.Instance.onCloseConfigMenu += () => isGamePaused = false;
     }
 
     public void gameOver()
@@ -56,6 +60,11 @@ public class GameController : Singleton<GameController>
             spaceStation = defaultSpaceStation;
         }
         Instantiate(spaceStation);
+    }
+
+    public bool getIsGamePaused()
+    {
+        return isGamePaused;
     }
 
     public bool isPlaying { get { return gameState == STATE.PLAYING; } }

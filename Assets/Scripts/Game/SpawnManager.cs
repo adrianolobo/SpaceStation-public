@@ -10,7 +10,9 @@ public class SpawnManager : Singleton<SpawnManager>
 
     private SpaceCarrierManager spaceCarrierManager;
 
-    private Coroutine spawnCoroutine;
+    private bool isSpawnStarted = false;
+
+    private float spawnCountdown = 0f;
 
     void Awake()
     {
@@ -18,15 +20,26 @@ public class SpawnManager : Singleton<SpawnManager>
         spaceCarrierManager = GetComponent<SpaceCarrierManager>();
     }
 
+    private bool isSpawnActive
+    {
+        get
+        {
+            if (isSpawnStarted)
+            {
+                return !GameController.Instance.getIsGamePaused();
+            }
+            return false;
+        }
+    }
+
     public void stop()
     {
-        StopCoroutine(spawnCoroutine);
+        isSpawnStarted = false;
     }
 
     public void startSpawnSequence()
     {
-        createCarrier();
-        spawnCoroutine = StartCoroutine(spawnSequence());
+        isSpawnStarted = true;
     }
     private int getAmountCargos()
     {
@@ -43,15 +56,19 @@ public class SpawnManager : Singleton<SpawnManager>
         return 3;
     }
 
-    IEnumerator spawnSequence()
+    private void Update()
     {
+        spawnSequence();
+    }
+
+    private void spawnSequence()
+    {
+        if (!isSpawnActive) return;
+        spawnCountdown -= Time.deltaTime;
+        if (spawnCountdown > 0) return;
         float[] spawnChanges = SpaceStation.Instance.spawnChances;
-        // TODO: CREATE A STOP FLAG
-        while (true)
-        {
-            yield return new WaitForSeconds(Random.Range(spawnChanges[0], spawnChanges[1]));
-            createCarrier();
-        }
+        spawnCountdown = Random.Range(spawnChanges[0], spawnChanges[1]);
+        createCarrier();
     }
 
     private void createCarrier()

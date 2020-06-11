@@ -9,10 +9,18 @@ public class StationLanding : MonoBehaviour
     public GameObject blueLight;
     public GameObject redLight;
     public GameObject redBlueLight;
+    private bool inDeliveryProcess = false;
+    private float deliveryTime = 1f;
+    private float deliveryCountdown = 0f;
 
     private void Awake()
     {
         createLights();
+    }
+
+    private void Update()
+    {
+        deliverContainer();
     }
 
     private void createLights()
@@ -27,7 +35,6 @@ public class StationLanding : MonoBehaviour
         if (accepts[0] != accepts[1]) return redBlueLight;
         if (accepts[0] == Container.CARGO_COLOR.BLUE) return blueLight;
         return redLight;
-
     }
 
 
@@ -60,13 +67,13 @@ public class StationLanding : MonoBehaviour
                 canReceive = true;
             };
         }
-        Debug.Log(canReceive);
         return canReceive;
     }
 
     public void startDelivery()
     {
-        StartCoroutine(deliverContainer(accepts));
+        inDeliveryProcess = true;
+        deliveryCountdown = deliveryTime;
     }
 
     public void finishLanding()
@@ -75,18 +82,23 @@ public class StationLanding : MonoBehaviour
         carrierLanding = null;
     }
 
-    IEnumerator deliverContainer(Container.CARGO_COLOR[] accepts)
+    private void deliverContainer()
     {
-        bool hasContainer = true;
-        while(hasContainer)
-        {
-            yield return new WaitForSeconds(1f);
-            if (!carrierLanding) break;
-            hasContainer = carrierLanding.removeContainer(accepts);
+        if (!carrierLanding) return;
+        if (!inDeliveryProcess) return;
+        if (GameController.Instance.isGameOver) return;
+        if (GameController.Instance.getIsGamePaused()) return;
+        deliveryCountdown -= Time.deltaTime;
+        if (deliveryCountdown > 0) return;
 
-            GameController.Instance.deliverCargo(1);
+        bool hasContainer = carrierLanding.removeContainer(accepts);
+        if (!hasContainer)
+        {
+            carrierLanding.startMove();
+            inDeliveryProcess = false;
+            return;
         }
-        if (!carrierLanding) yield return null;
-        carrierLanding.startMove();
+        GameController.Instance.deliverCargo(1);
+        deliveryCountdown = deliveryTime;
     }
 }

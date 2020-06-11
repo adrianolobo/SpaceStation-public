@@ -19,12 +19,6 @@ public class ConfigMenu : MonoBehaviour
         optionsBackground.gameObject.SetActive(false);
     }
 
-    private void OnDestroy()
-    {
-        GameEvents.Instance.onCloseConfigMenu -= closeConfigMenu;
-        GameEvents.Instance.onOpenConfigMenu -= openConfigMenu;
-    }
-
     private void openConfigMenu()
     {
         optionsOverlayCanvasGroup.gameObject.SetActive(true);

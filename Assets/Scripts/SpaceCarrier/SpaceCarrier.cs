@@ -75,6 +75,11 @@ public class SpaceCarrier : MonoBehaviour
     }
     void move()
     {
+        if (GameController.Instance.getIsGamePaused())
+        {
+            rigidBody.velocity = new Vector2(0, 0);
+            return;
+        }
         rigidBody.velocity = transform.right * carrierVelocity;
     }
 
