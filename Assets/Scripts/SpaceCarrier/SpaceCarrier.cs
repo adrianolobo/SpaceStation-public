@@ -37,7 +37,7 @@ public class SpaceCarrier : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        GameController.Instance.gameOver();
+        GameController.Instance.gameOver(collision.GetContact(0).point);
     }
 
     public void destroyCarrier()
