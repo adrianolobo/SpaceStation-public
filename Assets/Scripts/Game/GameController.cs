@@ -23,14 +23,13 @@ public class GameController : Singleton<GameController>
         GameEvents.Instance.onCloseConfigMenu += () => isGamePaused = false;
     }
 
-    public void gameOver()
+    public async void gameOver()
     {
         if (isGameOver) return;
         gameState = STATE.GAME_OVER;
         SpawnManager.Instance.stop();
-
-        SpaceCarrierManager.Instance.destroyAll();
-        SceneLoader.Instance.goToMenu();
+        await new WaitForSeconds(5f);
+        GameOverMenu.Instance.openGameOverMenu();
     }
 
     public void play()

@@ -12,7 +12,6 @@ public class SpaceCarrierOffscreen : MonoBehaviour
         spaceCarrier = GetComponent<SpaceCarrier>();
     }
 
-    // Update is called once per frame
     void Update()
     {
         createIndicator();

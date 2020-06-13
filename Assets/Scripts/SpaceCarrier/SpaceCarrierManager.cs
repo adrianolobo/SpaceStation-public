@@ -27,6 +27,11 @@ public class SpaceCarrierManager : Singleton<SpaceCarrierManager>
         {
             SpaceCarrier offScreenSpaceCarrier = offScreenSpaceCarriers[i];
             if (!offScreenSpaceCarrier.getHasAlreadyEnteredScreen()) continue;
+            if (offScreenSpaceCarrier.getAmountOfContainers() > 0)
+            {
+                offScreenSpaceCarrier.turnToCenter();
+                return;
+            }
             spaceCarrierList.Remove(offScreenSpaceCarrier);
             Destroy(offScreenSpaceCarrier.gameObject);
         }

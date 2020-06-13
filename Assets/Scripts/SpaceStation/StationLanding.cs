@@ -43,12 +43,18 @@ public class StationLanding : MonoBehaviour
         if (carrierLanding) return;
         if (!canReceiveCargo(carrier)) return;
         carrierLanding = carrier;
-        Vector3 stationLandingPosition = transform.position;
-        stationLandingPosition.z = 0;
-        carrier.initLanding(this, landingCorrectionPosition, stationLandingPosition);
+
+        carrier.initLanding(this, landingCorrectionPosition, getStationLandingPosition());
     }
 
-    private bool canReceiveCargo(SpaceCarrier carrier)
+    public Vector3 getStationLandingPosition()
+    {
+        Vector3 stationLandingPosition = transform.position;
+        stationLandingPosition.z = 0;
+        return stationLandingPosition;
+    }
+
+    public bool canReceiveCargo(SpaceCarrier carrier)
     {
         ContainerManager containerManager = carrier.getContainerManager();
         bool canReceive = false;

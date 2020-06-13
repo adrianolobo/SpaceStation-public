@@ -15,13 +15,14 @@ public class TouchController : MonoBehaviour
         for (int i = 0; i < Input.touchCount; i++)
         {
             Touch touch = Input.GetTouch(i);
+            #if UNITY_ANDROID
             touchHandler(touch);
+            #endif
         }
     }
 
     private void touchHandler(Touch touch)
     {
-        return;
         if (touch.phase == TouchPhase.Ended || touch.phase == TouchPhase.Canceled)
         {
             touchEndHandler(touch);

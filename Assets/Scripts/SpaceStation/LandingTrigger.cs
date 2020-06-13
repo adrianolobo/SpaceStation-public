@@ -14,8 +14,24 @@ public class LandingTrigger : MonoBehaviour
     {
         SpaceCarrier spaceCarrier = collision.gameObject.GetComponent<SpaceCarrier>();
         if (!spaceCarrier) return;
+
+        stationLanding.landCarrier(spaceCarrier, getLandingCorrectionPosition());
+    }
+
+    public bool checkLandingTrigger(SpaceCarrier spaceCarrierToCheck)
+    {
+        return stationLanding.canReceiveCargo(spaceCarrierToCheck);
+    }
+
+    public Vector3 getLandingCorrectionPosition()
+    {
         Vector3 landingCorrectionPosition = transform.position;
         landingCorrectionPosition.z = 0;
-        stationLanding.landCarrier(spaceCarrier, landingCorrectionPosition);
+        return landingCorrectionPosition;
+    }
+
+    public Vector3 getStationLandingPosition()
+    {
+        return stationLanding.getStationLandingPosition();
     }
 }

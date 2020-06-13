@@ -7,7 +7,10 @@ public class PathLine : MonoBehaviour
 
     private LineRenderer pathLine;
     private SpaceCarrier spaceCarrier;
-
+    public GameObject TouchLandingTriggerPrefab;
+    private TouchLandingTrigger touchLandingTrigger;
+    public Gradient defaultColor;
+    public Gradient landingColor;
     bool isCreatingPath = false;
     Vector3 lastTouchPosition;
 
@@ -23,27 +26,33 @@ public class PathLine : MonoBehaviour
 
     private void Update()
     {
-        // JUST TO DEBUG!!!!!!!
+        #if UNITY_EDITOR
         drawLine(getMousePosition());
         if (Input.GetMouseButtonUp(0))
         {
             touchEnded();
         }
+        #endif
     }
 
     private void OnMouseDown()
-    {  
-       // JUST TO DEBUG!!!!!!!
-       touchBegan(getMousePosition());
+    {
+        #if UNITY_EDITOR
+        touchBegan(getMousePosition());
+        #endif
     }
 
     public void touchBegan(Vector3 touchPosition)
     {
+        if (GameController.Instance.isGameOver) return;
         if (spaceCarrier.isInDeliveryProcess)
         {
-            isCreatingPath = false;
+            touchEnded();
             return;
         };
+        setDefaultColor();
+        touchLandingTrigger = Instantiate(TouchLandingTriggerPrefab, touchPosition, Quaternion.identity).GetComponent<TouchLandingTrigger>();
+        touchLandingTrigger.register(spaceCarrier);
         isCreatingPath = true;
         pathLine.positionCount = 1;
         pathLine.SetPosition(0, touchPosition);
@@ -52,6 +61,9 @@ public class PathLine : MonoBehaviour
     public void touchEnded()
     {
         isCreatingPath = false;
+        if (!touchLandingTrigger) return;
+        Destroy(touchLandingTrigger.gameObject);
+        touchLandingTrigger = null;
     }
 
     private bool hasTouchMoved(Vector3 touchPosition)
@@ -63,6 +75,7 @@ public class PathLine : MonoBehaviour
 
     public void drawLine(Vector3 touchPosition)
     {
+        if (GameController.Instance.isGameOver) return;
         if (!spaceCarrier)
         {
             Debug.Log("BUG");
@@ -71,6 +84,7 @@ public class PathLine : MonoBehaviour
         if (spaceCarrier.isInDeliveryProcess) return;
         if (!isCreatingPath) return;
         if (!hasTouchMoved(touchPosition)) return;
+        touchLandingTrigger.transform.localPosition = touchPosition;
         float distanceToTouch = calculateDistanceToTouch(touchPosition);
         if (distanceToTouch < minimalLineChunck) return;
         createLineChunks(touchPosition);
@@ -157,8 +171,25 @@ public class PathLine : MonoBehaviour
 
     public void createLandingLine(Vector3 landCorrectionPosition, Vector3 position)
     {
-        pathLine.positionCount = 0;
         createLineChunks(landCorrectionPosition);
         createLineChunks(position);
+        touchEnded();
+        setLandingColor();
+    }
+
+    public void resetLine()
+    {
+        if (!pathLine) return;
+        pathLine.positionCount = 0;
+    }
+
+    private void setLandingColor()
+    {
+        pathLine.colorGradient = landingColor;
+    }
+
+    private void setDefaultColor()
+    {
+        pathLine.colorGradient = defaultColor;
     }
 }

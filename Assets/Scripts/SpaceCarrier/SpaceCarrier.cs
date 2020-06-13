@@ -59,9 +59,14 @@ public class SpaceCarrier : MonoBehaviour
         pathLine.updateLine();
     }
 
-    void turnToCenter()
+    public void turnToCenter()
     {
-        Vector2 direction = new Vector3(0, 0, 0) - currentPosition;
+        pathLine.resetLine();
+        int randomRangeX = 35;
+        int randomRangeY = 45;
+        float randomX = Random.Range(-randomRangeX, randomRangeX) / 10;
+        float randomY = Random.Range(-randomRangeY, randomRangeY) / 10;
+        Vector2 direction = new Vector3(randomX, randomY, 0) - currentPosition;
         float angleBetween = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
         transform.rotation = Quaternion.AngleAxis(angleBetween, Vector3.forward);
     }
@@ -128,6 +133,7 @@ public class SpaceCarrier : MonoBehaviour
     {
         stationLanding = stationToLand;
         gameObject.layer = LayerMask.NameToLayer(landingLayer);
+        pathLine.resetLine();
         pathLine.createLandingLine(landCorrectionPosition, targetPosition);
     }
 
@@ -181,6 +187,11 @@ public class SpaceCarrier : MonoBehaviour
     public ContainerManager getContainerManager()
     {
         return GetComponentInChildren<ContainerManager>();
+    }
+
+    public PathLine getPathLine()
+    {
+        return pathLine;
     }
 
     public bool isInDeliveryProcess

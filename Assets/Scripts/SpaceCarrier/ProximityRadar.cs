@@ -6,10 +6,12 @@ public class ProximityRadar : MonoBehaviour
 {
     private int countNearObjects = 0;
     private SpriteRenderer proximitySrpite;
+    private SpaceCarrier spaceCarrier;
 
     private void Start()
     {
         proximitySrpite = GetComponent<SpriteRenderer>();
+        spaceCarrier = GetComponentInParent<SpaceCarrier>();
         disableRadar();
     }
     private void OnTriggerEnter2D(Collider2D collision)
@@ -26,6 +28,11 @@ public class ProximityRadar : MonoBehaviour
 
     private void manageWarning()
     {
+        if (spaceCarrier.isInDeliveryProcess)
+        {
+            disableRadar();
+            return;
+        }
         if (countNearObjects > 0)
         {
             activateRadar();
