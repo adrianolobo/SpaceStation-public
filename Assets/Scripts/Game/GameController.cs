@@ -29,7 +29,7 @@ public class GameController : Singleton<GameController>
         gameState = STATE.GAME_OVER;
         SpawnManager.Instance.stop();
         CollisionExplosions.Instance.explode(colliderPosition);
-        await new WaitForSeconds(5f);
+        await new WaitForSeconds(3f);
         GameOverMenu.Instance.openGameOverMenu();
     }
 
