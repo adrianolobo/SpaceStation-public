@@ -26,6 +26,8 @@ public class GameController : Singleton<GameController>
     public async void gameOver(Vector3 colliderPosition)
     {
         if (isGameOver) return;
+        SoundManager.Instance.Play(Sounds.SOUND.EXPLOSION);
+        SoundManager.Instance.Play(Sounds.SOUND.WARP_DRIVE);
         gameState = STATE.GAME_OVER;
         SpawnManager.Instance.stop();
         CollisionExplosions.Instance.explode(colliderPosition);
@@ -39,6 +41,7 @@ public class GameController : Singleton<GameController>
         instantiateStation();
         gameState = STATE.PLAYING;
         SpawnManager.Instance.startSpawnSequence();
+        SoundManager.Instance.Play(Sounds.SOUND.ENGINE);
     }
 
     public void deliverCargo(int cargoAmount)
