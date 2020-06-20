@@ -13,6 +13,7 @@ public class PathLine : MonoBehaviour
     public Gradient landingColor;
     bool isCreatingPath = false;
     Vector3 lastTouchPosition;
+    private Sound onTrackAudio;
 
     public float minimalLineChunck = 0.02f;
     public float distanceToRemoveChunck = 0.08f;
@@ -22,6 +23,7 @@ public class PathLine : MonoBehaviour
         pathLine = GetComponent<LineRenderer>();
         pathLine.positionCount = 0;
         spaceCarrier = GetComponent<SpaceCarrier>();
+        onTrackAudio = SoundManager.Instance.getSound(Sounds.SOUND.ON_TRACK);
     }
 
     private void Update()
@@ -185,6 +187,8 @@ public class PathLine : MonoBehaviour
 
     private void setLandingColor()
     {
+        if (pathLine.colorGradient.Equals(landingColor)) return;
+        onTrackAudio.Play();
         pathLine.colorGradient = landingColor;
     }
 

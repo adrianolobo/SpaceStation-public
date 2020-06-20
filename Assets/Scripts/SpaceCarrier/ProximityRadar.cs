@@ -7,12 +7,12 @@ public class ProximityRadar : MonoBehaviour
     private int countNearObjects = 0;
     private SpriteRenderer proximitySrpite;
     private SpaceCarrier spaceCarrier;
-    private AudioSource warningSound;
+    private Sound warningSound;
 
     private void Start()
     {
         proximitySrpite = GetComponent<SpriteRenderer>();
-        warningSound = GetComponent<AudioSource>();
+        warningSound = SoundManager.Instance.getSound(Sounds.SOUND.PROXIMITY_WARNING);
         spaceCarrier = GetComponentInParent<SpaceCarrier>();
         disableRadar();
     }

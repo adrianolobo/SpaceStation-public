@@ -34,4 +34,17 @@ public class SoundManager : Singleton<SoundManager>
         return sounds.Find(soundItem => soundItem.name == sound);
     }
 
+    public Sound createSound(Sounds.SOUND sound)
+    {
+        Sound soundToClone = sounds.Find(soundItem => soundItem.name == sound);
+        Sound newSound = new Sound();
+        newSound.volume = soundToClone.volume;
+        newSound.pitch = soundToClone.pitch;
+        newSound.name = soundToClone.name;
+        newSound.loop = soundToClone.loop;
+        newSound.audioClip = soundToClone.audioClip;
+        newSound.playOnAwake = soundToClone.playOnAwake;
+        newSound.setAudioSource(gameObject.AddComponent<AudioSource>());
+        return newSound;
+    }
 }

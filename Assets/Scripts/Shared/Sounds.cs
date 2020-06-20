@@ -8,5 +8,9 @@ public class Sounds
         EXPLOSION,
         ENGINE,
         WARP_DRIVE,
+        CARRIER_GO,
+        ON_TRACK,
+        CARGO_AUDIO,
+        PROXIMITY_WARNING,
     }
 }
