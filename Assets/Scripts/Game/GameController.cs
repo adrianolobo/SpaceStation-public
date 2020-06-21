@@ -42,6 +42,7 @@ public class GameController : Singleton<GameController>
         gameState = STATE.PLAYING;
         SpawnManager.Instance.startSpawnSequence();
         SoundManager.Instance.Play(Sounds.SOUND.ENGINE);
+        SoundManager.Instance.Play(Sounds.SOUND.GAME_BACKGROUND);
     }
 
     public void deliverCargo(int cargoAmount)

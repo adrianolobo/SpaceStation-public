@@ -12,12 +12,10 @@ public class StationLanding : MonoBehaviour
     private bool inDeliveryProcess = false;
     private float deliveryTime = 1f;
     private float deliveryCountdown = 0f;
-    private Sound cargoAudio;
     private Sound carrierGo;
 
     private void Awake()
     {
-        cargoAudio = SoundManager.Instance.getSound(Sounds.SOUND.CARGO_AUDIO);
         carrierGo = SoundManager.Instance.getSound(Sounds.SOUND.CARRIER_GO);
         createLights();
     }
@@ -109,7 +107,6 @@ public class StationLanding : MonoBehaviour
             inDeliveryProcess = false;
             return;
         }
-        cargoAudio.Play();
         GameController.Instance.deliverCargo(1);
         deliveryCountdown = deliveryTime;
     }

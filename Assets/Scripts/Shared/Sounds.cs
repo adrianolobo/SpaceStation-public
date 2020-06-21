@@ -12,5 +12,8 @@ public class Sounds
         ON_TRACK,
         CARGO_AUDIO,
         PROXIMITY_WARNING,
+        CARRIER_SELECT,
+        PLAY,
+        GAME_BACKGROUND,
     }
 }

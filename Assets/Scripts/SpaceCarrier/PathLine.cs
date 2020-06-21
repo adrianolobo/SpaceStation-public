@@ -14,6 +14,7 @@ public class PathLine : MonoBehaviour
     bool isCreatingPath = false;
     Vector3 lastTouchPosition;
     private Sound onTrackAudio;
+    private Sound carrierSelected;
 
     public float minimalLineChunck = 0.02f;
     public float distanceToRemoveChunck = 0.08f;
@@ -24,6 +25,7 @@ public class PathLine : MonoBehaviour
         pathLine.positionCount = 0;
         spaceCarrier = GetComponent<SpaceCarrier>();
         onTrackAudio = SoundManager.Instance.getSound(Sounds.SOUND.ON_TRACK);
+        carrierSelected = SoundManager.Instance.getSound(Sounds.SOUND.CARRIER_SELECT);
     }
 
     private void Update()
@@ -52,6 +54,7 @@ public class PathLine : MonoBehaviour
             touchEnded();
             return;
         };
+        carrierSelected.Play();
         setDefaultColor();
         touchLandingTrigger = Instantiate(TouchLandingTriggerPrefab, touchPosition, Quaternion.identity).GetComponent<TouchLandingTrigger>();
         touchLandingTrigger.register(spaceCarrier);

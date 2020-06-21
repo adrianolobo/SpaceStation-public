@@ -11,8 +11,6 @@ public class TouchLandingTrigger : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Debug.Log("TRIGGER ENTRER");
-        Debug.Log(collision.gameObject);
         LandingTrigger landingTrigger = collision.gameObject.GetComponent<LandingTrigger>();
         if (!landingTrigger) return;
         if (!landingTrigger.checkLandingTrigger(spaceCarrier)) return;

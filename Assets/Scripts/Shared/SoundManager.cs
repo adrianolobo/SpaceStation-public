@@ -7,7 +7,6 @@ public class SoundManager : Singleton<SoundManager>
     public List<Sound> sounds;
     void Awake()
     {
-        // Não funfa pra multiplos sons ao mesmo tempo T_T
         foreach (Sound sound in sounds)
         {
             sound.setAudioSource(gameObject.AddComponent<AudioSource>());

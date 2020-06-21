@@ -29,6 +29,7 @@ public class SceneLoader : Singleton<SceneLoader>
     public async void goToGame(string stationName)
     {
         stationNameToLoad = stationName;
+        SoundManager.Instance.Play(Sounds.SOUND.PLAY);
         await sceneDisappear();
         SceneManager.LoadScene("GameScene");
     }
