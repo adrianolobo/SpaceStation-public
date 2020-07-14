@@ -35,4 +35,14 @@ public class Sound
     {
         audioSource.Stop();
     }
+
+    public void mute()
+    {
+        audioSource.volume = 0;
+    }
+
+    public void unMute()
+    {
+        audioSource.volume = volume;
+    }
 }

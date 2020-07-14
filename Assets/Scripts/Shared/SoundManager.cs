@@ -5,11 +5,15 @@ using UnityEngine;
 public class SoundManager : Singleton<SoundManager>
 {
     public List<Sound> sounds;
+    public bool isAudioOn = true;
+    private List<Sound> allSounds = new List<Sound>();
     void Awake()
     {
+        isAudioOn = Storage.Instance.getAudioStatus();
         foreach (Sound sound in sounds)
         {
             sound.setAudioSource(gameObject.AddComponent<AudioSource>());
+            allSounds.Add(sound);
         }
     }
 
@@ -44,6 +48,31 @@ public class SoundManager : Singleton<SoundManager>
         newSound.audioClip = soundToClone.audioClip;
         newSound.playOnAwake = soundToClone.playOnAwake;
         newSound.setAudioSource(gameObject.AddComponent<AudioSource>());
+        allSounds.Add(newSound);
+        if (isAudioOn)
+        {
+            newSound.mute();
+        }
         return newSound;
+    }
+
+    public void muteAllSounds()
+    {
+        isAudioOn = false;
+        Storage.Instance.setAudioStatus(isAudioOn);
+        allSounds.ForEach((Sound sound) =>
+        {
+            sound.mute();
+        });
+    }
+
+    public void unMuteAllSounds()
+    {
+        isAudioOn = true;
+        Storage.Instance.setAudioStatus(isAudioOn);
+        allSounds.ForEach((Sound sound) =>
+        {
+            sound.unMute();
+        });
     }
 }

@@ -23,4 +23,17 @@ public class Storage : Singleton<Storage>
     {
         return PlayerPrefs.GetInt($"highest-score:{stationName}");
     }
+
+    public void setAudioStatus(bool audioStatus)
+    {
+        PlayerPrefs.SetString("audio-status", audioStatus ? "on" : "off");
+    }
+
+    public bool getAudioStatus()
+    {
+        if (PlayerPrefs.GetString("audio-status") == "on") return true;
+        if (PlayerPrefs.GetString("audio-status") == "off") return false;
+        setAudioStatus(true);
+        return true;
+    }
 }

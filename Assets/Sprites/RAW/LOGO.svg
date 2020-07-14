@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="793.70081"
+   height="1122.5197"
+   viewBox="0 0 210 297"
+   version="1.1"
+   id="svg8"
+   inkscape:version="0.92.4 (5da689c313, 2019-01-14)"
+   sodipodi:docname="LOGO.svg">
+  <defs
+     id="defs2" />
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#000000"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="0.5"
+     inkscape:cx="496.21678"
+     inkscape:cy="481.70603"
+     inkscape:document-units="px"
+     inkscape:current-layer="layer3"
+     showgrid="false"
+     units="px"
+     inkscape:window-width="1920"
+     inkscape:window-height="1017"
+     inkscape:window-x="-8"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1" />
+  <metadata
+     id="metadata5">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     sodipodi:insensitive="true" />
+  <g
+     inkscape:groupmode="layer"
+     id="layer4"
+     inkscape:label="Ground"
+     sodipodi:insensitive="true">
+    <path
+       style="opacity:1;fill:#231a02;fill-opacity:1;stroke-width:0.24935842"
+       d="M -1.4959334e-6,233.93529 C 61.61266,215.37638 169.47213,222.27154 209.96612,234.69507 l 0.37764,63.06087 H -1.4959334e-6 Z"
+       id="rect856"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="ccccc" />
+  </g>
+  <g
+     inkscape:groupmode="layer"
+     id="layer2"
+     inkscape:label="UFO"
+     style="display:inline"
+     sodipodi:insensitive="true">
+    <ellipse
+       style="opacity:1;fill:#4d4d4d;fill-opacity:1;stroke-width:0.21618393"
+       id="path835"
+       cx="151.31967"
+       cy="65.008339"
+       ry="23.780233"
+       rx="25.324404"
+       transform="rotate(-8.132313)" />
+    <ellipse
+       style="opacity:1;fill:#666666;fill-opacity:1;stroke-width:0.25519344"
+       id="path817"
+       cx="163.40279"
+       cy="8.2340336"
+       rx="58.775299"
+       ry="14.741071"
+       transform="rotate(16.151199)" />
+    <path
+       style="opacity:1;fill:#b3b3b3;fill-opacity:0.37688443;stroke-width:0.73053396"
+       d="m 373.23633,137.55078 c -0.29759,0.003 -0.55986,0.0176 -0.85352,0.0215 a 222.14286,55.714283 16.151199 0 0 -1.20508,2.32226 222.14286,55.714283 16.151199 0 0 197.87696,115.30859 222.14286,55.714283 16.151199 0 0 227.64453,10.64649 C 757.44337,242.29108 666.44519,208.01292 588.85938,184.51562 503.11125,158.54634 422.62426,143.92961 373.23633,137.55078 Z"
+       transform="scale(0.26458333)"
+       id="ellipse892"
+       inkscape:connector-curvature="0" />
+  </g>
+  <g
+     inkscape:groupmode="layer"
+     id="layer3"
+     inkscape:label="UFO LIGHT"
+     style="opacity:1">
+    <path
+       style="display:inline;opacity:1;fill:#ffffff;fill-opacity:0.19095477;stroke-width:0.26458332"
+       d="m 141.1456,56.661337 c 3.23244,-5.186261 23.24412,1.339412 23.48153,8.492186 l 18.12434,200.852427 c 2.5136,31.82874 -187.9130917,30.98165 -163.663681,-18.52084 z"
+       id="rect837"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="ccccc" />
+    <ellipse
+       style="opacity:0.294;fill:#e2e2e2;fill-opacity:0.4321608;stroke-width:0.27966321"
+       id="path875"
+       cx="109.52645"
+       cy="260.19138"
+       rx="83.528168"
+       ry="22.111214"
+       transform="matrix(0.99934871,0.03608527,-0.0407943,0.99916757,0,0)" />
+  </g>
+</svg>
